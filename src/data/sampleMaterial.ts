@@ -1,99 +1,108 @@
 /**
- * Preloaded Sample EdTech Dataset: Class 11/12 Physics (Mechanics & Gravitation)
- * Designed for judges and evaluators to test GapFinder AI end-to-end with 1 click.
+ * Preloaded Sample EdTech Dataset: Foundations of AI, Machine Learning & RAG
+ * Tailored specifically for {igebra.ai} / AI Ready School curriculum.
  */
 
 export const SAMPLE_SYLLABUS = `
-SUBJECT: Physics (Mechanics & Gravitation)
-GRADE: Senior Secondary / College Prep
+COURSE: Applied AI & Data Science Foundations
+TARGET: AI & Machine Learning Specialization
 
-MODULE 1: LAWS OF MOTION
-1.1 Newton's First Law and Inertia: Concept of inertia of rest, motion, and direction. Definition of force and momentum.
-1.2 Newton's Second Law: Mathematical statement F = dp/dt and F = ma. Impulse and impulse-momentum theorem. Unit of force (Newton).
-1.3 Newton's Third Law: Action-reaction pair principle. Conservation of linear momentum. Equilibrium of concurrent forces.
+MODULE 1: SUPERVISED LEARNING & MODEL SELECTION
+1.1 Regression vs Classification: Problem formulations, linear regression hypothesis, loss functions (MSE), decision boundaries.
+1.2 Logistic Regression: Sigmoid activation function, cross-entropy loss, odds ratio, probability thresholds.
+1.3 Model Generalization: Bias-variance tradeoff, overfitting vs underfitting, regularization (L1 Lasso, L2 Ridge).
 
-MODULE 2: WORK, ENERGY AND POWER
-2.1 Work and Kinetic Energy: Work done by constant and variable force. Kinetic energy expression (1/2 mv^2).
-2.2 Work-Energy Theorem: Statement, proof for variable force, relation between work and change in kinetic energy.
-2.3 Potential Energy and Conservation: Conservative vs non-conservative forces. Gravitational potential energy (mgh). Conservation of mechanical energy.
+MODULE 2: MODEL EVALUATION & DIAGNOSTIC METRICS
+2.1 Confusion Matrix: True Positives (TP), False Positives (FP), True Negatives (TN), False Negatives (FN).
+2.2 Precision, Recall & F1-Score: Formula definitions, precision-recall tradeoff, choosing metrics for imbalanced datasets (e.g. medical diagnosis).
+2.3 ROC and AUC: Receiver Operating Characteristic curve, False Positive Rate vs True Positive Rate, area under curve interpretation.
 
-MODULE 3: GRAVITATION
-3.1 Universal Law of Gravitation: Statement, formula F = G(m1*m2)/r^2, gravitational constant G. Vector form.
-3.2 Acceleration due to Gravity (g): Relation g = GM/R^2. Variation of g with altitude (height) and depth.
-3.3 Orbital Velocity and Escape Speed: Orbital velocity of a satellite v_o = sqrt(GM/r). Escape speed v_e = sqrt(2gR).
+MODULE 3: NEURAL NETWORKS & DEEP LEARNING
+3.1 Artificial Neurons: Perceptron architecture, weights, bias, activation functions (ReLU, Sigmoid, Softmax).
+3.2 Training & Optimization: Forward propagation, loss computation, backpropagation via chain rule, Gradient Descent and learning rate.
+3.3 Overfitting in Deep Learning: Dropout regularization, early stopping, batch normalization.
 
-MODULE 4: CIRCULAR MOTION
-4.1 Centripetal Acceleration and Force: Kinematics of uniform circular motion. Centripetal acceleration a_c = v^2/r = omega^2 * r.
-4.2 Applications: Motion of car on level road, banking of circular roads to prevent skidding.
+MODULE 4: LLMs & RETRIEVAL-AUGMENTED GENERATION (RAG)
+4.1 Embeddings & Vector Space: Semantic representations, tokenization, high-dimensional vector spaces, cosine similarity metric.
+4.2 RAG Architecture: Dense vector retrieval, chunking strategies with overlap, top-K context injection into prompts.
+4.3 Hallucination Mitigation: Grounding LLM responses in retrieved source context, source citations, verification vs pre-training memory.
 `.trim();
 
 export const SAMPLE_NOTES = `
-=== CHAPTER 1: LAWS OF MOTION ===
+=== CHAPTER 1: SUPERVISED MACHINE LEARNING ===
 
-[Chapter 1: Laws of Motion · Section 1.1 · Page 12]
-Newton's First Law states that every body continues in its state of rest or of uniform motion in a straight line unless compelled to change that state by an external unbalanced force. This tendency of objects to resist changes in their state of motion is called Inertia. Inertia is directly proportional to mass. A heavier object has greater inertia than a lighter object.
+[Chapter 1: Supervised ML · Section 1.1 · Page 14]
+Supervised learning algorithms learn a mapping from input features X to target outputs Y using labeled training data. In Linear Regression, the model predicts continuous target values using the linear hypothesis: y_pred = w^T * x + b. The standard loss function is Mean Squared Error (MSE): MSE = (1/N) * sum((y_actual - y_pred)^2). Linear regression assumes a linear relationship between features and target, and minimizes MSE using Ordinary Least Squares or gradient descent.
 
-[Chapter 1: Laws of Motion · Section 1.2 · Page 15]
-Newton's Second Law states that the rate of change of momentum of an object is directly proportional to the applied force and takes place in the direction in which the force acts. Mathematically, F = dp/dt. When mass is constant, F = m * a, where F is net force in Newtons (N), m is mass in kilograms (kg), and a is acceleration in m/s^2. Impulse is defined as the product of force and the time interval during which it acts (J = F * Delta t), which equals the change in momentum (Impulse-Momentum Theorem).
+[Chapter 1: Supervised ML · Section 1.2 · Page 19]
+Logistic Regression is used for binary classification tasks where target variable Y is in {0, 1}. It maps any real-valued number into a probability range [0, 1] using the Sigmoid (logistic) function: sigma(z) = 1 / (1 + exp(-z)), where z = w^T * x + b. Instead of MSE, Logistic Regression is trained using Binary Cross-Entropy Loss (Log Loss) because MSE produces a non-convex loss surface with multiple local minima when combined with the sigmoid function. A default threshold of 0.5 classifies instances as positive or negative.
 
-[Chapter 1: Laws of Motion · Section 1.3 · Page 18]
-Newton's Third Law states that to every action there is always an equal and opposite reaction. Important rule: Action and reaction forces act on different bodies simultaneously; therefore, they never cancel each other out. From this law, the Principle of Conservation of Linear Momentum is derived: in an isolated system with no external net force, the total vector momentum before interaction equals total vector momentum after interaction (m1*u1 + m2*u2 = m1*v1 + m2*v2).
+[Chapter 1: Supervised ML · Section 1.3 · Page 26]
+The Bias-Variance Tradeoff is central to model generalization. Bias is the error resulting from overly simplistic assumptions (leading to Underfitting, where the model performs poorly on both training and test sets). Variance is the error resulting from excessive sensitivity to small fluctuations in training data (leading to Overfitting, where training accuracy is high but validation error explodes). Regularization penalizes complex model weights: L1 Regularization (Lasso) adds lambda * sum(|w_i|), driving redundant weights to exact zero for feature selection. L2 Regularization (Ridge) adds lambda * sum(w_i^2), shrinking weights smoothly.
 
-=== CHAPTER 2: WORK, ENERGY AND POWER ===
+=== CHAPTER 2: MODEL EVALUATION & METRICS ===
 
-[Chapter 2: Work and Energy · Section 2.1 · Page 28]
-Work is done when a force produces displacement in the direction of the force: W = F * d * cos(theta), where theta is the angle between force and displacement vectors. If theta = 90 degrees, work done is zero (e.g., centripetal force doing zero work on an orbiting satellite). Kinetic Energy (K) is the energy possessed by an object due to its motion: K = 0.5 * m * v^2. Kinetic energy is a scalar quantity and is always positive.
+[Chapter 2: Evaluation Metrics · Section 2.1 · Page 38]
+A Confusion Matrix summarizes prediction performance on classification tasks:
+- True Positive (TP): Model correctly predicts positive class.
+- False Positive (FP): Model falsely predicts positive (Type I error).
+- True Negative (TN): Model correctly predicts negative class.
+- False Negative (FN): Model falsely predicts negative (Type II error).
+Accuracy = (TP + TN) / (TP + TN + FP + FN). While simple, accuracy is dangerously misleading on imbalanced datasets (e.g., fraud detection where 99% of transactions are legitimate).
 
-[Chapter 2: Work and Energy · Section 2.2 · Page 32]
-The Work-Energy Theorem states that the net work done by all forces (conservative, non-conservative, and external) acting on a particle equals the change in its kinetic energy: W_net = Delta K = K_final - K_initial. This theorem is valid for both constant and variable forces.
+[Chapter 2: Evaluation Metrics · Section 2.2 · Page 42]
+Precision measures exactness: "Out of all predicted positive cases, what fraction is actually positive?" Formula: Precision = TP / (TP + FP). Recall (Sensitivity) measures completeness: "Out of all actual positive cases, what fraction did the model find?" Formula: Recall = TP / (TP + FN). When False Negatives are costly (such as disease diagnosis), we prioritize Recall. When False Positives are costly (such as spam filtering), we prioritize Precision. The F1-Score is the harmonic mean of Precision and Recall: F1 = 2 * (Precision * Recall) / (Precision + Recall). The harmonic mean is used rather than arithmetic mean because it penalizes extreme imbalances between precision and recall.
 
-[Chapter 2: Work and Energy · Section 2.3 · Page 35]
-A force is conservative if the work done by it on a particle depends only on initial and final positions, not on the path taken (e.g., gravity, spring force). Gravitational potential energy near Earth's surface is U = mgh. Total mechanical energy E = K + U remains constant in an isolated system under conservative forces (Delta E = 0).
+[Chapter 2: Evaluation Metrics · Section 2.3 · Page 49]
+The Receiver Operating Characteristic (ROC) curve plots True Positive Rate (TPR = Recall) against False Positive Rate (FPR = FP / (FP + TN)) across all classification decision thresholds from 0 to 1. Area Under the ROC Curve (AUC) quantifies overall ranking capability: an AUC of 0.5 indicates random guessing, while AUC of 1.0 represents a perfect classifier. AUC is threshold-independent and invariant to class scale.
 
-=== CHAPTER 3: GRAVITATION ===
+=== CHAPTER 3: DEEP LEARNING & NEURAL NETWORKS ===
 
-[Chapter 3: Gravitation · Section 3.1 · Page 45]
-Newton's Universal Law of Gravitation states that every point mass attracts every other point mass with a force directly proportional to the product of their masses and inversely proportional to the square of the distance between them: F = G * (m1 * m2) / r^2. The universal gravitational constant G has an experimental value of 6.674 * 10^-11 N*m^2/kg^2.
+[Chapter 3: Deep Learning · Section 3.1 · Page 58]
+Artificial Neural Networks are composed of layers of interconnected nodes (neurons). Each neuron computes z = sum(w_i * x_i) + b and passes z through a non-linear Activation Function a = f(z). Without non-linear activation functions, stacking multiple layers collapses mathematically into a single linear regression. Modern networks prefer Rectified Linear Unit (ReLU), f(z) = max(0, z), because it solves the vanishing gradient problem encountered in deep sigmoid networks and computes rapidly.
 
-[Chapter 3: Gravitation · Section 3.2 · Page 48]
-Acceleration due to gravity on Earth's surface is g = G * M / R^2, approximately 9.8 m/s^2. At height h above the surface, acceleration due to gravity decreases: g_h = g * (1 - 2h/R) for h << R. At depth d below the surface, gravity decreases linearly: g_d = g * (1 - d/R). Notice that at Earth's center (d = R), g becomes exactly zero.
+[Chapter 3: Deep Learning · Section 3.2 · Page 65]
+Training neural networks involves two phases:
+1. Forward Propagation: Input features flow through network layers to calculate predictions and total loss J(w).
+2. Backpropagation: The gradient of the loss function with respect to every weight (del J / del w) is calculated moving backward from output to input layers using the mathematical Chain Rule of calculus.
+Weights are then updated via Gradient Descent: w = w - alpha * (del J / del w), where alpha is the learning rate. If alpha is too large, the optimization diverges; if too small, training becomes excessively slow.
 
-[Chapter 3: Gravitation · Section 3.3 · Page 52]
-Escape speed is the minimum speed required for an object to escape Earth's gravitational pull: v_e = sqrt(2 * g * R), which is approximately 11.2 km/s on Earth. The orbital speed of a satellite orbiting at distance r from the center of Earth is v_o = sqrt(G * M / r) = sqrt(g * R) when close to Earth, which is approximately 7.9 km/s. Therefore, v_e = sqrt(2) * v_o.
+=== CHAPTER 4: RAG & LARGE LANGUAGE MODELS ===
 
-=== CHAPTER 4: CIRCULAR MOTION ===
+[Chapter 4: RAG & LLMs · Section 4.1 · Page 78]
+Embeddings convert words, sentences, or paragraphs into dense numerical vectors in a continuous geometric space where semantically similar items reside close together. The standard similarity measure is Cosine Similarity: cos(theta) = (A dot B) / (||A|| * ||B||), which evaluates the cosine of the angle between two vectors, ranging from -1 (opposite) to +1 (identical direction), regardless of magnitude.
 
-[Chapter 4: Circular Motion · Section 4.1 · Page 60]
-In uniform circular motion, speed is constant but direction changes continuously, producing an acceleration directed toward the center called Centripetal Acceleration: a_c = v^2 / r = omega^2 * r, where omega is angular velocity. The net inward force producing this acceleration is Centripetal Force: F_c = m * v^2 / r.
+[Chapter 4: RAG & LLMs · Section 4.2 · Page 86]
+Retrieval-Augmented Generation (RAG) is an architectural pattern that connects pre-trained Large Language Models to external private document collections without model retraining. Documents are parsed, broken into semantic chunks (typically 200 to 500 tokens with 10% overlap), and indexed. When a user asks a question, the retriever computes similarity between the query and chunk vectors, fetching the Top-K most relevant passages. These passages are injected into the LLM system prompt as verified context.
 
-[Chapter 4: Circular Motion · Section 4.2 · Page 64]
-On a curved horizontal level road, friction provides the necessary centripetal force: maximum safe speed is v_max = sqrt(mu * g * r), where mu is coefficient of static friction. On banked roads inclined at an angle theta, the normal force provides centripetal force without relying on friction, giving optimal speed v = sqrt(r * g * tan(theta)).
+[Chapter 4: RAG & LLMs · Section 4.3 · Page 92]
+RAG directly mitigates hallucinations by enforcing strict grounding: the generative model is instructed to answer solely based on the retrieved snippets and provide explicit citations (e.g. Chapter 2, Page 42). Fine-tuning modifies internal model weights for style and tone, but cannot guarantee factual accuracy or supply verifiable page references. RAG separates dynamic external knowledge retrieval from language generation.
 `.trim();
 
 export const SAMPLE_PAST_PAPERS = `
-PAST BOARD & ENTRANCE EXAMINATION QUESTIONS (2022 - 2025)
+PAST TECHNICAL ASSESSMENTS & EXAM QUESTIONS (AI & DATA SCIENCE 2023 - 2025)
 
-Question 1 (2024 Exam · 3 Marks):
-Explain why a cricket player lowers his hands backward while catching a fast-moving cricket ball. State the law and formula involved.
+Question 1 (2024 Exam · 4 Marks):
+Explain why Mean Squared Error (MSE) is unsuitable as a loss function for Logistic Regression. What loss function should be used instead and why?
 
 Question 2 (2024 Exam · 5 Marks):
-State Newton's Second Law of Motion. Derive the formula F = ma from the rate of change of momentum. A force of 20 N acts on a mass of 5 kg for 3 seconds. Find the impulse and velocity acquired from rest.
+In a medical cancer detection model where failing to detect cancer in a sick patient is catastrophic, should you optimize for Precision or Recall? Define both metrics and explain why.
 
-Question 3 (2023 Exam · 4 Marks):
-State and prove the Work-Energy Theorem for a variable force in one dimension. Show that work done is equal to the change in kinetic energy.
+Question 3 (2023 Exam · 3 Marks):
+Explain the Bias-Variance Tradeoff. Describe what happens to training error and validation error when a model is severely overfitting.
 
-Question 4 (2023 Exam · 3 Marks):
-Derive the expression for the acceleration due to gravity at a depth 'd' below the surface of Earth. At what depth does gravity become half of its value at the surface?
+Question 4 (2025 Exam · 5 Marks):
+State the mathematical formula for the F1-Score. Why do data scientists use the harmonic mean instead of the arithmetic mean when calculating F1-score?
 
-Question 5 (2025 Exam · 5 Marks):
-What is escape speed? Derive an expression for the escape speed of a body projected from the surface of Earth and show that v_e = sqrt(2) * v_o.
+Question 5 (2025 Exam · 4 Marks):
+Why are non-linear activation functions necessary in Deep Neural Networks? Explain why ReLU is preferred over Sigmoid in hidden layers.
 
-Question 6 (2022 Exam · 2 Marks):
-Why does a passenger sitting in a moving bus lurch forward when the driver applies brakes suddenly? Name the property of matter involved.
+Question 6 (2024 Exam · 3 Marks):
+Explain how backpropagation uses the Chain Rule of calculus to update weights in an Artificial Neural Network.
 
-Question 7 (2025 Exam · 4 Marks):
-A car of mass 1000 kg rounds a circular curve of radius 50 m on a banked road inclined at 15 degrees. Derive the formula for optimum banking velocity without depending on friction.
+Question 7 (2025 Exam · 5 Marks):
+What is Retrieval-Augmented Generation (RAG)? Distinguish between Retrieval and Generation, and explain why RAG is preferred over fine-tuning for question-answering over private documents.
 
-Question 8 (2024 Exam · 3 Marks):
-Distinguish between conservative and non-conservative forces with two examples of each. Show that work done in a closed path by a conservative force is zero.
+Question 8 (2023 Exam · 3 Marks):
+Define Cosine Similarity. Why is cosine similarity preferred over Euclidean distance when comparing text embeddings?
 `.trim();

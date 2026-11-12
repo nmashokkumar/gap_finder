@@ -118,7 +118,7 @@ export default function Navbar() {
             {/* 1-Click Load Sample Demo Button */}
             <button
               onClick={handleLoadDemo}
-              title="Loads Class 11/12 Physics Syllabus, Notes & Past Papers"
+              title="Loads AI & Data Science Syllabus, Notes & Past Papers"
               className={`flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                 isLoadedSample 
                   ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
@@ -128,8 +128,8 @@ export default function Navbar() {
               {isLoadedSample ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="hidden sm:inline">Sample Physics Loaded</span>
-                  <span className="sm:hidden">Physics Loaded</span>
+                  <span className="hidden sm:inline">Sample AI/ML Loaded</span>
+                  <span className="sm:hidden">AI Loaded</span>
                 </>
               ) : (
                 <>
