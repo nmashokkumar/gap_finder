@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-import { generateObject } from 'ai';
 import { z } from 'zod';
-import { groq, GROQ_MODEL } from '@/lib/ai/groq';
+import { generateStructured } from '@/lib/ai/structured';
 import { GapReport, QuizAttempt, TopicGap, TopicNode } from '@/types';
 
 const reasonsSchema = z.object({
@@ -80,10 +79,9 @@ export async function POST(req: Request) {
     });
 
     // Step 2: Generate crisp human-readable diagnostic reasons per tested topic via Groq
-    const { object } = await generateObject({
-      model: groq(GROQ_MODEL),
-      schema: reasonsSchema,
-      prompt: `
+    const object = await generateStructured(
+      reasonsSchema,
+      `
 You are an academic study doctor writing a concise diagnostic report for a student.
 For each topic below, write ONE specific, actionable sentence explaining why the student is Weak, Medium, or Strong based on the exact score and missed concepts provided.
 
@@ -93,8 +91,8 @@ Example style:
 
 Topic Results:
 ${JSON.stringify(testedSummaries, null, 2)}
-`,
-    });
+`
+    );
 
     const reasonMap = new Map<string, string>();
     object.topicDiagnostics.forEach((d) => reasonMap.set(d.topicId, d.diagnosticReason));

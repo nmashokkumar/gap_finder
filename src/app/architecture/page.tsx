@@ -3,19 +3,22 @@
 import React, { useEffect, useState } from 'react';
 import { Layers, Database, Cpu, ShieldCheck, Search, ArrowRight, FileText } from 'lucide-react';
 import { TextChunk, RetrievedChunk } from '@/types';
-import { getChunks } from '@/lib/storage/studentStore';
+import { getChunks, getTopicMap } from '@/lib/storage/studentStore';
 import { retrieveTopK } from '@/lib/rag/retriever';
 
 export default function ArchitecturePage() {
   const [chunks, setChunks] = useState<TextChunk[]>([]);
-  const [query, setQuery] = useState('Precision vs Recall');
+  const [query, setQuery] = useState('');
   const [retrieved, setRetrieved] = useState<RetrievedChunk[]>([]);
 
   useEffect(() => {
     const loaded = getChunks();
+    const topics = getTopicMap();
+    const defaultQuery = topics[0]?.name || loaded[0]?.sectionLabel || 'Core concepts';
     setChunks(loaded);
+    setQuery(defaultQuery);
     if (loaded.length > 0) {
-      setRetrieved(retrieveTopK('Precision vs Recall', loaded, 3));
+      setRetrieved(retrieveTopK(defaultQuery, loaded, 3));
     }
   }, []);
 
@@ -104,7 +107,7 @@ export default function ArchitecturePage() {
             <li>
               <strong>3. Where Generation Is Used:</strong>
               <ul className="pl-4 mt-1 space-y-1 list-disc text-stone-500">
-                <li>Structuring syllabus topics via <code className="bg-stone-100 px-1 rounded">generateObject()</code> + Zod</li>
+                <li>Structuring syllabus topics via <code className="bg-stone-100 px-1 rounded">generateText()</code> + <code className="bg-stone-100 px-1 rounded">Output.object()</code></li>
                 <li>Formulating grounded MCQs &amp; verbatim excerpts from retrieved chunks</li>
                 <li>Writing diagnostic reasons from exact TypeScript accuracy math</li>
                 <li>Streaming grounded explanations via <code className="bg-stone-100 px-1 rounded">streamText()</code></li>
@@ -134,7 +137,7 @@ export default function ArchitecturePage() {
             type="text"
             value={query}
             onChange={(e) => handleRunRetrieval(e.target.value)}
-            placeholder="Test a query (e.g. 'Precision vs Recall', 'Backpropagation', 'Cosine Similarity')..."
+            placeholder="Test a retrieval query against your uploaded study materials..."
             className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 bg-stone-50 text-xs sm:text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
           />
         </div>

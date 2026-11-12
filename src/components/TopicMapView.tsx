@@ -18,12 +18,24 @@ import { getTopicMap, saveTopicMap, getDocuments } from '@/lib/storage/studentSt
 
 export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
   const [topics, setTopics] = useState<TopicNode[]>([]);
+  const [sourceNames, setSourceNames] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [expandedTopic, setExpandedTopic] = useState<string | null>(null);
 
-  useEffect(() => {
+  const syncTopicView = () => {
     setTopics(getTopicMap());
+    setSourceNames(
+      getDocuments()
+        .filter((d) => d.type === 'syllabus' || d.type === 'past_paper')
+        .map((d) => d.fileName)
+    );
+  };
+
+  useEffect(() => {
+    syncTopicView();
+    window.addEventListener('gapfinder-state-changed', syncTopicView);
+    return () => window.removeEventListener('gapfinder-state-changed', syncTopicView);
   }, []);
 
   const handleGenerateTopicMap = async () => {
@@ -32,7 +44,7 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
     const pastPaperDoc = docs.find((d) => d.type === 'past_paper');
 
     if (!syllabusDoc || !syllabusDoc.rawText.trim()) {
-      setError('Please upload a Syllabus (or click "Load AI/ML Sample Material") above first.');
+      setError('Please upload a Syllabus PDF/TXT (or load sample material) above first.');
       return;
     }
 
@@ -45,6 +57,7 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
         body: JSON.stringify({
           syllabusText: syllabusDoc.rawText,
           pastPapersText: pastPaperDoc?.rawText || '',
+          syllabusFileName: syllabusDoc.fileName,
         }),
       });
 
@@ -80,7 +93,9 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
         <div>
           <h2 className="text-base font-bold text-stone-900">2. Syllabus Topic Map</h2>
           <p className="text-xs text-stone-500 mt-0.5">
-            Maps past-paper questions to syllabus topics using retrieval to identify high-weight exam areas.
+            {sourceNames.length > 0
+              ? `Mapping topics from ${sourceNames.join(' & ')} using TF-IDF retrieval.`
+              : 'Maps past-paper questions to syllabus topics using retrieval to identify high-weight exam areas.'}
           </p>
         </div>
 

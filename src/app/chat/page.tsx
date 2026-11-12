@@ -94,6 +94,9 @@ function ChatWorkspace() {
       .join('');
   };
 
+  const sourceNames = Array.from(new Set(chunks.map((c) => c.fileName)));
+  const firstTopicLabel = suggestedTopics[0]?.label;
+
   return (
     <div className="max-w-4xl mx-auto space-y-5">
       {/* Header */}
@@ -107,7 +110,9 @@ function ChatWorkspace() {
             <span>Explain-This-Topic Assistant</span>
           </h1>
           <p className="text-xs text-stone-500 mt-0.5">
-            Answers strictly from your uploaded materials ({chunks.length} indexed chunks). Out-of-scope questions are refused.
+            {sourceNames.length > 0
+              ? `Answers strictly from ${sourceNames.join(', ')} (${chunks.length} indexed chunks). Out-of-scope questions are refused.`
+              : `Answers strictly from your uploaded materials (${chunks.length} indexed chunks). Out-of-scope questions are refused.`}
           </p>
         </div>
 
@@ -183,7 +188,9 @@ function ChatWorkspace() {
                   Ask Anything Covered in Your Notes
                 </p>
                 <p className="text-xs text-stone-500 leading-relaxed">
-                  Try asking: &ldquo;Why is Binary Cross-Entropy used instead of MSE for Logistic Regression?&rdquo; or test the guardrail by asking an unrelated trivia question.
+                  {firstTopicLabel
+                    ? `Try asking: "Explain ${firstTopicLabel} from ${sourceNames[0] || 'my notes'}" or test the guardrail by asking an unrelated trivia question.`
+                    : 'Ask any question from your uploaded files, or test the guardrail by asking an unrelated trivia question.'}
                 </p>
               </div>
             </div>

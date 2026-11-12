@@ -22,6 +22,7 @@ import {
   loadSampleDataset,
   clearAllStudentData,
   getDocuments,
+  isSampleDatasetActive,
 } from '@/lib/storage/studentStore';
 import { StudentProfile } from '@/types';
 
@@ -38,11 +39,19 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [student, setStudent] = useState<StudentProfile | null>(null);
-  const [hasDocs, setHasDocs] = useState(false);
+  const [docsCount, setDocsCount] = useState(0);
+  const [sampleActive, setSampleActive] = useState(false);
+
+  const syncNavState = () => {
+    setStudent(getCurrentStudent());
+    setDocsCount(getDocuments().length);
+    setSampleActive(isSampleDatasetActive());
+  };
 
   useEffect(() => {
-    setStudent(getCurrentStudent());
-    setHasDocs(getDocuments().length > 0);
+    syncNavState();
+    window.addEventListener('gapfinder-state-changed', syncNavState);
+    return () => window.removeEventListener('gapfinder-state-changed', syncNavState);
   }, [pathname]);
 
   if (pathname === '/login') {
@@ -56,14 +65,14 @@ export default function Navbar() {
 
   const handleLoadDemo = () => {
     loadSampleDataset();
-    setHasDocs(true);
+    syncNavState();
     window.location.href = '/';
   };
 
   const handleReset = () => {
     if (confirm('Clear all uploaded materials, quiz attempts, and revision plans?')) {
       clearAllStudentData();
-      setHasDocs(false);
+      syncNavState();
       window.location.href = '/';
     }
   };
@@ -111,28 +120,41 @@ export default function Navbar() {
 
           {/* Actions & Student */}
           <div className="flex items-center space-x-2">
-            <button
-              type="button"
-              onClick={handleLoadDemo}
-              title="Load sample AI/ML syllabus, notes, and past papers"
-              className={`flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
-                hasDocs
-                  ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                  : 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
-              }`}
-            >
-              {hasDocs ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-700" />
-                  <span className="hidden sm:inline">Sample Loaded</span>
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-                  <span>Load Sample</span>
-                </>
-              )}
-            </button>
+            {docsCount > 0 && !sampleActive ? (
+              <Link
+                href="/"
+                title="Active uploaded study materials"
+                className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border bg-teal-50 text-teal-800 border-teal-200"
+              >
+                <Check className="w-3.5 h-3.5 text-teal-700" />
+                <span className="hidden sm:inline">
+                  {docsCount} {docsCount === 1 ? 'File' : 'Files'} Active
+                </span>
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={handleLoadDemo}
+                title="Load sample AI/ML syllabus, notes, and past papers"
+                className={`flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
+                  sampleActive
+                    ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                    : 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
+                }`}
+              >
+                {sampleActive ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-700" />
+                    <span className="hidden sm:inline">Sample Loaded</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Load Sample</span>
+                  </>
+                )}
+              </button>
+            )}
 
             <button
               type="button"

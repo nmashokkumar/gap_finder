@@ -1,13 +1,14 @@
 'use client';
 
-import { 
-  StudentProfile, 
-  StudyDocument, 
-  TextChunk, 
-  TopicNode, 
-  QuizAttempt, 
-  GapReport, 
-  RevisionPlan 
+import {
+  DocumentType,
+  StudentProfile,
+  StudyDocument,
+  TextChunk,
+  TopicNode,
+  QuizAttempt,
+  GapReport,
+  RevisionPlan,
 } from '@/types';
 import { SAMPLE_SYLLABUS, SAMPLE_NOTES, SAMPLE_PAST_PAPERS } from '@/data/sampleMaterial';
 
@@ -94,6 +95,7 @@ function persistState(state: StudentState): void {
   try {
     const student = getCurrentStudent() || DEMO_PROFILE;
     localStorage.setItem(getStorageKey(student.email), JSON.stringify(state));
+    window.dispatchEvent(new Event('gapfinder-state-changed'));
   } catch (err) {
     console.error('Failed to save student state', err);
   }
@@ -104,13 +106,43 @@ export function getDocuments(): StudyDocument[] {
   return loadState().documents;
 }
 
+export function isSampleDatasetActive(): boolean {
+  const docs = getDocuments();
+  return docs.length > 0 && docs.every((d) => d.id.startsWith('doc-sample-'));
+}
+
 export function saveDocument(doc: StudyDocument): void {
   const state = loadState();
-  const existingIndex = state.documents.findIndex((d) => d.id === doc.id);
-  if (existingIndex >= 0) {
-    state.documents[existingIndex] = doc;
-  } else {
-    state.documents.push(doc);
+  const isCustomUpload = !doc.id.startsWith('doc-sample-');
+
+  if (isCustomUpload) {
+    const hadSample = state.documents.some((d) => d.id.startsWith('doc-sample-'));
+    state.documents = state.documents.filter((d) => !d.id.startsWith('doc-sample-'));
+    state.chunks = state.chunks.filter((c) => !c.id.startsWith('sample-chunk-'));
+    if (hadSample) {
+      state.topicMap = [];
+      state.gapReport = null;
+      state.previousGapReport = null;
+      state.revisionPlan = null;
+    }
+  }
+
+  // Always replace the previous document in the same slot (syllabus / notes / past_paper)
+  state.documents = [...state.documents.filter((d) => d.type !== doc.type), doc];
+
+  if (isCustomUpload && doc.type === 'syllabus') {
+    state.topicMap = [];
+  }
+
+  persistState(state);
+}
+
+export function removeDocument(type: DocumentType): void {
+  const state = loadState();
+  state.documents = state.documents.filter((d) => d.type !== type);
+  state.chunks = state.chunks.filter((c) => c.docType !== type);
+  if (type === 'syllabus') {
+    state.topicMap = [];
   }
   persistState(state);
 }

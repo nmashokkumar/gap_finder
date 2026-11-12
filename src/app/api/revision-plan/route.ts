@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
-import { generateObject } from 'ai';
 import { z } from 'zod';
-import { groq, GROQ_MODEL } from '@/lib/ai/groq';
+import { generateStructured } from '@/lib/ai/structured';
 import { GapReport, RevisionPlan, TextChunk } from '@/types';
 import { retrieveTopK } from '@/lib/rag/retriever';
 
@@ -59,10 +58,9 @@ export async function POST(req: Request) {
       };
     });
 
-    const { object } = await generateObject({
-      model: groq(GROQ_MODEL),
-      schema: planSchema,
-      prompt: `
+    const object = await generateStructured(
+      planSchema,
+      `
 You are an expert study coach creating a personalized, time-boxed revision plan.
 
 Student Schedule Budget:
@@ -78,8 +76,8 @@ Prioritization Rules (CRITICAL):
 
 Student Gap Diagnosis (already sorted by priority):
 ${JSON.stringify(topicsWithRefs, null, 2)}
-`,
-    });
+`
+    );
 
     const plan: RevisionPlan = {
       id: `plan-${Date.now()}`,

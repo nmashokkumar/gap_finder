@@ -18,6 +18,7 @@ import { QuizQuestion, AnswerEvaluation, QuizAttempt } from '@/types';
 import {
   getTopicMap,
   getChunks,
+  getDocuments,
   saveQuizAttempt,
   getLatestAttempt,
   getGapReport,
@@ -28,6 +29,7 @@ function QuizRunner() {
   const focusParam = searchParams.get('focus') || '';
 
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [sourceFiles, setSourceFiles] = useState<string[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +43,7 @@ function QuizRunner() {
     if (attempt) {
       setLatestAttempt(attempt);
     }
+    setSourceFiles(getDocuments().map((d) => d.fileName));
   }, []);
 
   const handleGenerateQuiz = async () => {
@@ -173,7 +176,9 @@ function QuizRunner() {
             RAG-Grounded Diagnostic Quiz
           </h1>
           <p className="text-xs text-stone-500 mt-0.5">
-            Every question is generated strictly from your uploaded material and includes source citations.
+            {sourceFiles.length > 0
+              ? `Questions grounded strictly in: ${sourceFiles.join(', ')}`
+              : 'Every question is generated strictly from your uploaded material and includes source citations.'}
           </p>
         </div>
 
