@@ -34,6 +34,7 @@ interface StudentState {
   topicMap: TopicNode[];
   attempts: QuizAttempt[];
   gapReport: GapReport | null;
+  previousGapReport: GapReport | null;
   revisionPlan: RevisionPlan | null;
 }
 
@@ -43,6 +44,7 @@ const DEFAULT_STATE: StudentState = {
   topicMap: [],
   attempts: [],
   gapReport: null,
+  previousGapReport: null,
   revisionPlan: null,
 };
 
@@ -156,8 +158,15 @@ export function getGapReport(): GapReport | null {
   return loadState().gapReport;
 }
 
+export function getPreviousGapReport(): GapReport | null {
+  return loadState().previousGapReport;
+}
+
 export function saveGapReport(report: GapReport): void {
   const state = loadState();
+  if (state.gapReport && state.gapReport.attemptId !== report.attemptId) {
+    state.previousGapReport = state.gapReport;
+  }
   state.gapReport = report;
   persistState(state);
 }
@@ -178,7 +187,7 @@ function parseSampleNotesIntoChunks(notesText: string): TextChunk[] {
   const chunks: TextChunk[] = [];
   const sections = notesText.split(/\[(.*?)\]/g);
 
-  // Pattern matches: [Chapter 1: Laws of Motion · Section 1.1 · Page 12]
+  // Pattern matches: [Chapter 1: Supervised ML · Section 1.1 · Page 14]
   for (let i = 1; i < sections.length; i += 2) {
     const header = sections[i].trim();
     const body = sections[i + 1]?.trim() || '';
@@ -186,15 +195,14 @@ function parseSampleNotesIntoChunks(notesText: string): TextChunk[] {
 
     const pageMatch = header.match(/Page\s+(\d+)/i);
     const pageNum = pageMatch ? parseInt(pageMatch[1], 10) : undefined;
-    const sectionMatch = header.match(/Section\s+([\d.]+)/i);
-    const sectionLabel = sectionMatch ? `Section ${sectionMatch[1]}` : header;
+    const cleanSection = header.replace(/·?\s*Page\s+\d+/i, '').trim();
 
     chunks.push({
       id: `sample-chunk-${chunks.length + 1}`,
       docId: 'doc-sample-notes',
       docType: 'notes',
-      fileName: 'Physics_Textbook_Notes.pdf',
-      sectionLabel: sectionLabel,
+      fileName: 'AI_ML_Textbook_Notes.pdf',
+      sectionLabel: cleanSection || header,
       pageNumber: pageNum,
       text: body,
     });
@@ -211,22 +219,22 @@ export function loadSampleDataset(): { documents: StudyDocument[]; chunks: TextC
     {
       id: 'doc-sample-syllabus',
       type: 'syllabus',
-      fileName: 'Physics_Senior_Syllabus.txt',
+      fileName: 'AI_ML_Syllabus.txt',
       rawText: SAMPLE_SYLLABUS,
       uploadedAt: now,
     },
     {
       id: 'doc-sample-notes',
       type: 'notes',
-      fileName: 'Physics_Textbook_Notes.pdf',
+      fileName: 'AI_ML_Textbook_Notes.pdf',
       rawText: SAMPLE_NOTES,
       uploadedAt: now,
-      pageCount: 64,
+      pageCount: 92,
     },
     {
       id: 'doc-sample-past-papers',
       type: 'past_paper',
-      fileName: 'Physics_Past_Papers_2022_2025.txt',
+      fileName: 'AI_ML_Past_Papers_2023_2025.txt',
       rawText: SAMPLE_PAST_PAPERS,
       uploadedAt: now,
     },
@@ -250,6 +258,7 @@ export function clearAllStudentData(): void {
   state.topicMap = [];
   state.attempts = [];
   state.gapReport = null;
+  state.previousGapReport = null;
   state.revisionPlan = null;
   persistState(state);
 }

@@ -2,26 +2,24 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { 
-  GitFork, 
-  Sparkles, 
-  Flame, 
-  ArrowRight, 
-  ChevronDown, 
-  ChevronUp, 
+import {
+  GitFork,
+  Sparkles,
+  Flame,
+  ArrowRight,
+  ChevronDown,
+  ChevronUp,
   FileQuestion,
-  RefreshCw 
+  RefreshCw,
+  AlertCircle,
 } from 'lucide-react';
 import { TopicNode } from '@/types';
-import { 
-  getTopicMap, 
-  saveTopicMap, 
-  getDocuments 
-} from '@/lib/storage/studentStore';
+import { getTopicMap, saveTopicMap, getDocuments } from '@/lib/storage/studentStore';
 
 export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
   const [topics, setTopics] = useState<TopicNode[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [expandedTopic, setExpandedTopic] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,11 +32,12 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
     const pastPaperDoc = docs.find((d) => d.type === 'past_paper');
 
     if (!syllabusDoc || !syllabusDoc.rawText.trim()) {
-      alert('Please upload or load a Syllabus first in Step 1!');
+      setError('Please upload a Syllabus (or click "Load AI/ML Sample Material") above first.');
       return;
     }
 
     setIsLoading(true);
+    setError(null);
     try {
       const res = await fetch('/api/topic-map', {
         method: 'POST',
@@ -55,11 +54,10 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
         setTopics(data.topics);
         if (onUpdate) onUpdate();
       } else {
-        alert(data.error || 'Failed to generate topic map');
+        setError(data.error || 'Failed to build topic map.');
       }
-    } catch (err) {
-      console.error(err);
-      alert('Error communicating with AI service');
+    } catch {
+      setError('Network error while connecting to AI service.');
     } finally {
       setIsLoading(false);
     }
@@ -68,43 +66,40 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
   const getFreqColor = (freq: 'High' | 'Medium' | 'Low') => {
     switch (freq) {
       case 'High':
-        return 'bg-rose-50 text-rose-700 border-rose-200';
+        return 'bg-rose-50 text-rose-800 border-rose-200';
       case 'Medium':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
+        return 'bg-amber-50 text-amber-800 border-amber-200';
       case 'Low':
-        return 'bg-slate-50 text-slate-700 border-slate-200';
+        return 'bg-stone-100 text-stone-700 border-stone-200';
     }
   };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+    <section className="bg-white border border-stone-200 rounded-2xl p-6 shadow-xs space-y-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-stone-100">
         <div>
-          <h2 className="text-lg font-bold text-slate-900 flex items-center space-x-2">
-            <GitFork className="w-5 h-5 text-indigo-600" />
-            <span>Step 2: Syllabus Topic Map & Exam Weightage</span>
-          </h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Structured breakdown of curriculum modules linked to historical exam frequency.
+          <h2 className="text-base font-bold text-stone-900">2. Syllabus Topic Map</h2>
+          <p className="text-xs text-stone-500 mt-0.5">
+            Maps past-paper questions to syllabus topics using retrieval to identify high-weight exam areas.
           </p>
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={handleGenerateTopicMap}
             disabled={isLoading}
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white text-xs font-semibold shadow-sm transition-all cursor-pointer"
+            className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 disabled:bg-stone-300 text-white text-xs font-semibold transition-colors cursor-pointer"
           >
             {isLoading ? (
               <>
                 <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                <span>Analyzing Syllabus with Groq...</span>
+                <span>Building Topic Map...</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>{topics.length > 0 ? 'Regenerate Topic Map' : 'Build Topic Map with AI'}</span>
+                <span>{topics.length > 0 ? 'Rebuild Topic Map' : 'Build Topic Map'}</span>
               </>
             )}
           </button>
@@ -112,60 +107,64 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
           {topics.length > 0 && (
             <Link
               href="/quiz"
-              className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition-all"
+              className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold transition-colors"
             >
-              <span>Take Diagnostic Quiz</span>
+              <span>Start Diagnostic Quiz</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           )}
         </div>
       </div>
 
+      {error && (
+        <div className="bg-rose-50 border border-rose-200 text-rose-800 rounded-xl p-3 text-xs flex items-center space-x-2">
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
+
       {topics.length === 0 ? (
-        <div className="py-10 text-center space-y-3 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-          <GitFork className="w-8 h-8 text-slate-300 mx-auto" />
-          <div className="space-y-1">
-            <p className="text-xs font-semibold text-slate-700">No Topic Map Generated Yet</p>
-            <p className="text-[11px] text-slate-500 max-w-sm mx-auto">
-              Make sure you have uploaded or loaded a Syllabus in Step 1, then click &ldquo;Build Topic Map with AI&rdquo;.
-            </p>
-          </div>
+        <div className="py-10 text-center space-y-2 bg-stone-50/70 rounded-xl border border-dashed border-stone-200">
+          <GitFork className="w-7 h-7 text-stone-300 mx-auto" />
+          <p className="text-xs font-semibold text-stone-700">No Topic Map Generated Yet</p>
+          <p className="text-[11px] text-stone-500 max-w-sm mx-auto">
+            After loading your syllabus and notes above, click &ldquo;Build Topic Map&rdquo; to structure your topics.
+          </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {topics.map((t, idx) => {
             const isExpanded = expandedTopic === t.id;
             return (
               <div
                 key={t.id}
-                className="bg-slate-50/70 border border-slate-200 rounded-2xl p-4 space-y-3 flex flex-col justify-between hover:bg-slate-50 transition-colors"
+                className="bg-stone-50/60 border border-stone-200 rounded-xl p-4 space-y-2.5 flex flex-col justify-between"
               >
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-indigo-700 font-mono">
-                      TOPIC 0{idx + 1}
+                    <span className="text-[10px] font-bold text-teal-800 font-mono">
+                      MODULE 0{idx + 1}
                     </span>
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full border flex items-center space-x-1 ${getFreqColor(
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border inline-flex items-center space-x-1 ${getFreqColor(
                         t.examFrequency
                       )}`}
                     >
-                      {t.examFrequency === 'High' && <Flame className="w-3 h-3 text-rose-500" />}
+                      {t.examFrequency === 'High' && <Flame className="w-3 h-3 text-rose-600" />}
                       <span>{t.examFrequency} Exam Weight</span>
                     </span>
                   </div>
 
-                  <h3 className="font-bold text-slate-900 text-sm">{t.name}</h3>
+                  <h3 className="font-bold text-stone-900 text-sm">{t.name}</h3>
                   {t.description && (
-                    <p className="text-xs text-slate-500 leading-relaxed">{t.description}</p>
+                    <p className="text-xs text-stone-600 leading-relaxed">{t.description}</p>
                   )}
 
-                  {/* Subtopics Pills */}
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {t.subtopics.map((sub, i) => (
                       <span
                         key={i}
-                        className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600"
+                        className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-white border border-stone-200 text-stone-700"
                       >
                         {sub}
                       </span>
@@ -173,27 +172,28 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
                   </div>
                 </div>
 
-                {/* Linked Past Paper Questions Accordion */}
                 {t.linkedQuestions && t.linkedQuestions.length > 0 && (
-                  <div className="pt-2 border-t border-slate-200">
+                  <div className="pt-2 border-t border-stone-200/80">
                     <button
                       type="button"
                       onClick={() => setExpandedTopic(isExpanded ? null : t.id)}
-                      className="text-[11px] font-semibold text-slate-600 hover:text-slate-900 flex items-center justify-between w-full"
+                      className="text-[11px] font-semibold text-stone-700 hover:text-stone-900 flex items-center justify-between w-full cursor-pointer"
                     >
                       <span className="flex items-center space-x-1">
-                        <FileQuestion className="w-3.5 h-3.5 text-indigo-500" />
-                        <span>Past Paper Questions ({t.linkedQuestions.length})</span>
+                        <FileQuestion className="w-3.5 h-3.5 text-teal-700" />
+                        <span>Matched Past-Paper Questions ({t.linkedQuestions.length})</span>
                       </span>
-                      {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                      {isExpanded ? (
+                        <ChevronUp className="w-3.5 h-3.5" />
+                      ) : (
+                        <ChevronDown className="w-3.5 h-3.5" />
+                      )}
                     </button>
 
                     {isExpanded && (
-                      <ul className="mt-2 space-y-1.5 text-[11px] text-slate-600 pl-2 border-l-2 border-indigo-200">
+                      <ul className="mt-2 space-y-1.5 text-[11px] text-stone-600 pl-2.5 border-l-2 border-teal-300">
                         {t.linkedQuestions.map((q, i) => (
-                          <li key={i} className="line-clamp-2">
-                            &bull; {q}
-                          </li>
+                          <li key={i}>{q}</li>
                         ))}
                       </ul>
                     )}
@@ -204,6 +204,6 @@ export default function TopicMapView({ onUpdate }: { onUpdate?: () => void }) {
           })}
         </div>
       )}
-    </div>
+    </section>
   );
 }
