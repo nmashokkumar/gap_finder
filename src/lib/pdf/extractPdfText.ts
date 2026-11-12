@@ -34,13 +34,14 @@ export async function extractTextFromFile(file: File): Promise<string> {
       const textContent = await page.getTextContent();
       const pageText = textContent.items
         .map((item: unknown) => {
-          const strItem = item as { str?: string };
-          return strItem.str || '';
+          const strItem = item as { str?: string; hasEOL?: boolean };
+          return (strItem.str || '') + (strItem.hasEOL ? '\n' : ' ');
         })
-        .join(' ');
+        .join('')
+        .replace(/ +/g, ' ');
 
       if (pageText.trim()) {
-        fullText += `\n\n[Page ${pageNum}]\n${pageText}`;
+        fullText += `\n\n[Page ${pageNum}]\n${pageText.trim()}`;
       }
     }
 

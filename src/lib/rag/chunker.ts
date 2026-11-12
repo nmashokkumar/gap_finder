@@ -2,83 +2,82 @@ import { DocumentType, TextChunk } from '@/types';
 
 /**
  * Splits document text into structured semantic chunks with citation metadata.
+ * Safe against inline square brackets such as DAX formulas ([Total Sales], DimDate[Date]).
  */
 export function chunkDocument(
   docId: string,
   docType: DocumentType,
   fileName: string,
   rawText: string,
-  maxWords = 350,
-  overlapWords = 50
+  maxWords = 260,
+  overlapWords = 40
 ): TextChunk[] {
   if (!rawText || !rawText.trim()) return [];
 
-  // If text already has explicit [Header · Section · Page] markers, chunk by markers first
-  if (rawText.includes('[') && rawText.includes('Section') && rawText.includes('Page')) {
-    const customChunks = parseMarkedText(docId, docType, fileName, rawText);
+  // 1. Check for explicit [Chapter/Section ... Page N] markers
+  const sectionHeaderRegex = /\[([^\]\n]*Section\s+[\d.]+[^\]\n]*)\]/gi;
+  if (sectionHeaderRegex.test(rawText)) {
+    const customChunks = parseSectionMarkedText(docId, docType, fileName, rawText);
     if (customChunks.length > 0) return customChunks;
   }
 
-  // Fallback: Split by paragraphs or double newlines
-  const paragraphs = rawText
-    .split(/\n\s*\n/)
-    .map((p) => p.trim())
-    .filter((p) => p.length > 20);
+  // 2. Split by [Page N] markers if present (from PDF extraction) or treat as Page 1
+  const pageBlocks = rawText.split(/\[Page\s+(\d+)\]/i);
+  const pages: Array<{ pageNum: number; body: string }> = [];
 
-  const chunks: TextChunk[] = [];
-  let currentWords: string[] = [];
-  let chunkIndex = 1;
-  let estimatedPage = 1;
-
-  for (let i = 0; i < paragraphs.length; i++) {
-    const pWords = paragraphs[i].split(/\s+/);
-
-    // Update estimated page roughly every 350 words
-    estimatedPage = Math.floor((chunks.length * maxWords) / 400) + 1;
-
-    if (currentWords.length + pWords.length > maxWords && currentWords.length > 0) {
-      const chunkText = currentWords.join(' ');
-      chunks.push({
-        id: `${docId}-chunk-${chunkIndex++}`,
-        docId,
-        docType,
-        fileName,
-        sectionLabel: extractSectionTitle(chunkText) || `Section ${chunkIndex - 1}`,
-        pageNumber: estimatedPage,
-        text: chunkText,
-      });
-
-      // Retain overlap
-      currentWords = currentWords.slice(-overlapWords);
+  if (pageBlocks.length > 1) {
+    for (let i = 1; i < pageBlocks.length; i += 2) {
+      const pageNum = parseInt(pageBlocks[i], 10) || 1;
+      const body = pageBlocks[i + 1]?.trim() || '';
+      if (body) pages.push({ pageNum, body });
     }
-
-    currentWords.push(...pWords);
+  } else {
+    pages.push({ pageNum: 1, body: rawText.trim() });
   }
 
-  if (currentWords.length > 0) {
-    const chunkText = currentWords.join(' ');
-    chunks.push({
-      id: `${docId}-chunk-${chunkIndex++}`,
-      docId,
-      docType,
-      fileName,
-      sectionLabel: extractSectionTitle(chunkText) || `Section ${chunkIndex - 1}`,
-      pageNumber: estimatedPage,
-      text: chunkText,
-    });
+  // 3. Window each page's text into clean <= maxWords chunks with overlap
+  const chunks: TextChunk[] = [];
+  let chunkIndex = 1;
+
+  for (const page of pages) {
+    const words = page.body.split(/\s+/).filter(Boolean);
+    if (words.length === 0) continue;
+
+    let start = 0;
+    while (start < words.length) {
+      const slice = words.slice(start, start + maxWords);
+      const chunkText = slice.join(' ').trim();
+
+      if (chunkText.length > 20) {
+        chunks.push({
+          id: `${docId}-chunk-${chunkIndex++}`,
+          docId,
+          docType,
+          fileName,
+          sectionLabel: extractSectionTitle(chunkText) || `Page ${page.pageNum} · Part ${chunks.length + 1}`,
+          pageNumber: page.pageNum,
+          text: chunkText,
+        });
+      }
+
+      if (start + maxWords >= words.length) break;
+      start += Math.max(maxWords - overlapWords, 50);
+    }
   }
 
   return chunks;
 }
 
-function parseMarkedText(
+function parseSectionMarkedText(
   docId: string,
   docType: DocumentType,
   fileName: string,
   text: string
 ): TextChunk[] {
   const chunks: TextChunk[] = [];
-  const parts = text.split(/\[(.*?)\]/g);
+  // Remove standalone [Page N] tags injected by pdf.js so they don't pollute bodies
+  const cleaned = text.replace(/\[Page\s+\d+\]\s*/gi, '');
+  const parts = cleaned.split(/\[([^\]\n]*Section\s+[\d.]+[^\]\n]*)\]/gi);
 
   for (let i = 1; i < parts.length; i += 2) {
     const header = parts[i].trim();
@@ -87,16 +86,14 @@ function parseMarkedText(
 
     const pageMatch = header.match(/Page\s+(\d+)/i);
     const pageNum = pageMatch ? parseInt(pageMatch[1], 10) : undefined;
-
-    const sectionMatch = header.match(/Section\s+([\d.]+)/i);
-    const sectionLabel = sectionMatch ? `Section ${sectionMatch[1]}` : header;
+    const cleanSection = header.replace(/·?\s*Page\s+\d+/i, '').trim();
 
     chunks.push({
       id: `${docId}-chunk-${chunks.length + 1}`,
       docId,
       docType,
       fileName,
-      sectionLabel,
+      sectionLabel: cleanSection || header,
       pageNumber: pageNum,
       text: body,
     });
@@ -106,9 +103,13 @@ function parseMarkedText(
 }
 
 function extractSectionTitle(text: string): string | null {
-  const line = text.split('\n')[0].trim();
-  if (line.startsWith('#') || line.toUpperCase().includes('MODULE') || line.toUpperCase().includes('CHAPTER')) {
-    return line.replace(/^#+\s*/, '').slice(0, 60);
+  const firstLine = text.split('\n')[0].trim();
+  const headingMatch = firstLine.match(/(?:CHAPTER|MODULE|SECTION)\s+[\d.]+[^.\n]*/i);
+  if (headingMatch) {
+    return headingMatch[0].slice(0, 65).trim();
+  }
+  if (firstLine.startsWith('#')) {
+    return firstLine.replace(/^#+\s*/, '').slice(0, 65).trim();
   }
   return null;
 }

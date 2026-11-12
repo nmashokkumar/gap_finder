@@ -1,0 +1,25 @@
+POWER BI & DATA ANALYTICS PAST CERTIFICATION & INTERVIEW PAPERS (2023 - 2025)
+
+Question 1 (2024 Exam · 4 Marks):
+Compare Import mode and DirectQuery mode in Power BI. Which storage mode uses the VertiPaq in-memory engine and why would an organization still choose DirectQuery?
+
+Question 2 (2024 Exam · 3 Marks):
+What is the difference between Merge Queries and Append Queries in Power Query? Which SQL operations do they correspond to?
+
+Question 3 (2023 Exam · 5 Marks):
+Explain the Star Schema design pattern in Power BI. Distinguish clearly between Fact tables and Dimension tables, and explain why bi-directional cross-filtering should generally be avoided.
+
+Question 4 (2025 Exam · 5 Marks):
+Differentiate between a Calculated Column and a Measure in DAX in terms of evaluation context (Row vs Filter context), storage in RAM, and appropriate use cases.
+
+Question 5 (2024 Exam · 4 Marks):
+Why is CALCULATE() considered the most important function in DAX? Write a DAX expression using CALCULATE and ALL() to find each product's percentage of total sales.
+
+Question 6 (2025 Exam · 4 Marks):
+Explain the difference between Static Row-Level Security (RLS) and Dynamic RLS. Which DAX function enables Dynamic RLS, and which workspace role users bypass RLS?
+
+Question 7 (2023 Exam · 3 Marks):
+What are the mandatory requirements for a dedicated Date table in Power BI when using Time Intelligence functions like SAMEPERIODLASTYEAR()?
+
+Question 8 (2025 Exam · 3 Marks):
+What is Query Folding in Power Query, and why does breaking query folding slow down dataset refreshes?

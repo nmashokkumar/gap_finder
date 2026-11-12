@@ -1,0 +1,71 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 1910 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(POWER BI & DATA ANALYTICS PAST CERTIFICATION & INTERVIEW PAPERS \(2023 - 2025\)) Tj T*
+() Tj T*
+(Question 1 \(2024 Exam · 4 Marks\):) Tj T*
+(Compare Import mode and DirectQuery mode in Power BI. Which storage mode uses the) Tj T*
+(VertiPaq in-memory engine and why would an organization still choose DirectQuery?) Tj T*
+() Tj T*
+(Question 2 \(2024 Exam · 3 Marks\):) Tj T*
+(What is the difference between Merge Queries and Append Queries in Power Query? Which) Tj T*
+(SQL operations do they correspond to?) Tj T*
+() Tj T*
+(Question 3 \(2023 Exam · 5 Marks\):) Tj T*
+(Explain the Star Schema design pattern in Power BI. Distinguish clearly between Fact) Tj T*
+(tables and Dimension tables, and explain why bi-directional cross-filtering should) Tj T*
+(generally be avoided.) Tj T*
+() Tj T*
+(Question 4 \(2025 Exam · 5 Marks\):) Tj T*
+(Differentiate between a Calculated Column and a Measure in DAX in terms of evaluation) Tj T*
+(context \(Row vs Filter context\), storage in RAM, and appropriate use cases.) Tj T*
+() Tj T*
+(Question 5 \(2024 Exam · 4 Marks\):) Tj T*
+(Why is CALCULATE\(\) considered the most important function in DAX? Write a DAX expression) Tj T*
+(using CALCULATE and ALL\(\) to find each product's percentage of total sales.) Tj T*
+() Tj T*
+(Question 6 \(2025 Exam · 4 Marks\):) Tj T*
+(Explain the difference between Static Row-Level Security \(RLS\) and Dynamic RLS. Which) Tj T*
+(DAX function enables Dynamic RLS, and which workspace role users bypass RLS?) Tj T*
+() Tj T*
+(Question 7 \(2023 Exam · 3 Marks\):) Tj T*
+(What are the mandatory requirements for a dedicated Date table in Power BI when using) Tj T*
+(Time Intelligence functions like SAMEPERIODLASTYEAR\(\)?) Tj T*
+() Tj T*
+(Question 8 \(2025 Exam · 3 Marks\):) Tj T*
+(What is Query Folding in Power Query, and why does breaking query folding slow down) Tj T*
+(dataset refreshes?) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000002147 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2273
+%%EOF

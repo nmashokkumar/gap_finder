@@ -1,0 +1,57 @@
+CHAPTER 1: POWER QUERY & STORAGE MODES (Page 1)
+
+[Chapter 1: Power Query · Section 1.1 · Page 1]
+Power BI offers three primary storage modes: Import, DirectQuery, and Dual.
+In Import mode, data is compressed and loaded directly into Power BI's in-memory VertiPaq engine. Import mode delivers the fastest visual query performance and supports the full set of DAX and Power Query transformations, though data is only as fresh as the last scheduled refresh.
+In DirectQuery mode, no data is copied into Power BI; instead, every visual interaction sends live SQL queries back to the underlying database. DirectQuery is ideal for massive datasets exceeding memory limits or real-time dashboards, but suffers slower report latency and restricted DAX/Power Query support.
+
+[Chapter 1: Power Query · Section 1.2 · Page 1]
+Inside Power Query Editor, combining tables happens via Merge Queries or Append Queries:
+- Merge Queries joins two tables horizontally based on matching key columns (analogous to SQL JOINs such as Left Outer, Inner, or Anti Join).
+- Append Queries stacks rows from two or more tables with matching schemas vertically (analogous to SQL UNION ALL).
+Unpivoting transforms wide crosstab columns (like Jan, Feb, Mar) into narrow attribute-value rows, which is critical for clean analytics modeling. Query Folding is the capability of Power Query to translate M-code steps into a single native SQL statement executed on the source server, dramatically speeding up refresh times.
+
+CHAPTER 2: STAR SCHEMA & DATA MODELING (Page 2)
+
+[Chapter 2: Data Modeling · Section 2.1 · Page 2]
+The gold standard for Power BI data modeling is the Star Schema. A Star Schema separates data into:
+1. Fact Tables: Tall, narrow tables storing quantitative numeric observations (e.g., SalesAmount, Quantity) and foreign keys, typically updated continuously.
+2. Dimension Tables: Short, wide tables storing descriptive business attributes used for filtering and grouping (e.g., DimProduct, DimCustomer, DimDate).
+Keeping a Star Schema rather than a flat single table or deep Snowflake Schema reduces model size in VertiPaq, simplifies DAX formulas, and eliminates ambiguous filter paths.
+
+[Chapter 2: Data Modeling · Section 2.2 · Page 2]
+Relationships connect Dimension tables (the '1' side) to Fact tables (the '*' many side) in a One-to-Many (1:*) relationship. By default, Cross-Filter Direction should be set to Single, meaning filters flow from Dimension tables down to Fact tables. Bi-directional (Both) cross-filtering should be avoided unless strictly necessary because it introduces circular dependency risks, ambiguity, and significant performance overhead.
+
+[Chapter 2: Data Modeling · Section 2.3 · Page 2]
+Dedicated Date Dimension tables are mandatory for reliable Time Intelligence. A proper Date table must contain contiguous dates without gaps covering full years from start to end, have a unique Date column marked as 'Mark as Date Table', and avoid relying on Power BI's hidden Auto Date/Time tables which bloat model memory.
+
+CHAPTER 3: DAX CONTEXTS & CALCULATE (Page 3)
+
+[Chapter 3: DAX · Section 3.1 · Page 3]
+Understanding Calculated Columns versus Measures is the most important concept in DAX:
+- Calculated Columns are evaluated during data refresh using Row Context (row by row), stored permanently in RAM inside the table, and consume memory. They are used when you need a static attribute for slicing or axis grouping.
+- Measures are evaluated dynamically at query time when a user interacts with a report visual, using Filter Context. Measures consume zero RAM until queried and are always preferred for aggregations like Total Sales, Profit Margin %, or YoY Growth.
+
+[Chapter 3: DAX · Section 3.2 · Page 3]
+CALCULATE(<expression>, <filter1>, <filter2>...) is the most powerful function in DAX because it is the only function that can modify Filter Context. CALCULATE evaluates an expression in a modified filter context—overriding, adding, or removing active slicer and visual filters.
+- ALL(Table or Column) removes all filters from the specified table or column, commonly used to compute % of Grand Total: DIVIDE([Total Sales], CALCULATE([Total Sales], ALL(DimProduct))).
+- ALLEXCEPT(Table, Col1) removes every filter on a table EXCEPT the specified columns.
+
+[Chapter 3: DAX · Section 3.3 · Page 3]
+Time Intelligence functions like TOTALYTD(), SAMEPERIODLASTYEAR(), and DATEADD() compute comparisons across time periods. For example:
+Sales LY = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(DimDate[Date])).
+All Time Intelligence functions require a continuous, unbroken Date column.
+
+CHAPTER 4: ROW-LEVEL SECURITY & POWER BI SERVICE (Page 4)
+
+[Chapter 4: Governance & Service · Section 4.1 · Page 4]
+Drill-through pages let report consumers right-click a data point (such as a specific region or product) and jump to a dedicated detail page filtered automatically for that item. Bookmarks capture the current visual state, filters, and spotlight selections for guided storytelling.
+
+[Chapter 4: Governance & Service · Section 4.2 · Page 4]
+Row-Level Security (RLS) restricts data visibility for specific users at the row level:
+- Static RLS uses hardcoded filter rules in Power BI Desktop roles, such as [Region] = "West". Easy to set up for 2-3 regions, but hard to maintain for hundreds of employees.
+- Dynamic RLS uses a security mapping table combined with the DAX function USERPRINCIPALNAME(), which returns the signed-in user's email (e.g., [Email] = USERPRINCIPALNAME()), scaling effortlessly to thousands of users.
+Important rule: RLS roles only restrict users assigned to the Viewer workspace role. Workspace Admins, Members, and Contributors bypass RLS restrictions.
+
+[Chapter 4: Governance & Service · Section 4.3 · Page 4]
+To refresh Import datasets stored on local corporate servers from the cloud Power BI Service, an On-Premises Data Gateway (Standard mode for enterprise sharing, Personal mode for single-user testing) acts as an encrypted bridge between the cloud service and on-prem SQL databases.

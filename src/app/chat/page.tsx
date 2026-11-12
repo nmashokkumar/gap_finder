@@ -17,6 +17,7 @@ import {
 import { TextChunk, TopicGap, TopicNode } from '@/types';
 import { getChunks, getGapReport, getTopicMap } from '@/lib/storage/studentStore';
 import type { ChatMessageMetadata } from '@/app/api/chat/route';
+import MarkdownMessage from '@/components/MarkdownMessage';
 
 function ChatWorkspace() {
   const searchParams = useSearchParams();
@@ -199,13 +200,13 @@ function ChatWorkspace() {
                 className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} space-y-2`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed whitespace-pre-wrap ${
+                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed ${
                     isUser
-                      ? 'bg-teal-700 text-white'
+                      ? 'bg-teal-700 text-white whitespace-pre-wrap'
                       : 'bg-stone-50 border border-stone-200 text-stone-800'
                   }`}
                 >
-                  {text}
+                  {isUser ? text : <MarkdownMessage content={text} />}
                 </div>
 
                 {/* Assistant Citations or Out-of-Scope Refusal Badge */}
