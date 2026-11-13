@@ -1,0 +1,220 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2566 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 1: DATA PREPROCESSING & PRINCIPAL COMPONENT ANALYSIS \(Page 1\)) Tj T*
+() Tj T*
+([Chapter 1: EDA & Feature Engineering · Section 1.1 · Page 1]) Tj T*
+(Exploratory Data Analysis \(EDA\) inspects distributions and relationships before) Tj T*
+(modeling.) Tj T*
+(The Interquartile Range \(IQR\) equals Q3 - Q1, spanning the middle 50% of the) Tj T*
+(distribution. Tukey outlier fences identify data points falling below Q1 - 1.5 * IQR) Tj T*
+(or above Q3 + 1.5 * IQR as outliers. Extreme outliers lie beyond 3.0 * IQR.) Tj T*
+(Missing data mechanisms fall into three categories:) Tj T*
+(1. Missing Completely at Random \(MCAR\): Missingness is independent of both observed) Tj T*
+(and unobserved variables.) Tj T*
+(2. Missing at Random \(MAR\): Missingness is systematically related to observed) Tj T*
+(variables, but not the missing value itself.) Tj T*
+(3. Missing Not at Random \(MNAR\): Missingness depends directly on the unobserved) Tj T*
+(missing value \(e.g., highest earners refusing to report income\).) Tj T*
+() Tj T*
+([Chapter 1: EDA & Feature Engineering · Section 1.2 · Page 1]) Tj T*
+(Feature scaling aligns variable magnitudes before gradient-based optimization or) Tj T*
+(distance metrics:) Tj T*
+(- Min-Max Normalization: x_norm = \(x - x_min\) / \(x_max - x_min\), binding values to [0,) Tj T*
+(1]. Highly sensitive to outliers.) Tj T*
+(- Standard Z-Score Standardization: x_std = \(x - mu\) / sigma, centering at zero mean) Tj T*
+(with unit standard deviation. Preferred for algorithms assuming normal distribution) Tj T*
+(\(Linear models, PCA, Logistic Regression\).) Tj T*
+() Tj T*
+([Chapter 1: EDA & Feature Engineering · Section 1.3 · Page 1]) Tj T*
+(Principal Component Analysis \(PCA\) is an unsupervised linear dimensionality reduction) Tj T*
+(technique that maximizes variance while minimizing reconstruction error:) Tj T*
+(1. Standardize the data matrix X \(n observations, p features\) so each feature has mean) Tj T*
+(0 and variance 1.) Tj T*
+(2. Compute the p x p sample covariance matrix: Sigma = \(1 / \(n - 1\)\) * X^T * X.) Tj T*
+(3. Calculate the eigenvalues lambda_i and eigenvectors v_i of Sigma: Sigma * v_i =) Tj T*
+(lambda_i * v_i.) Tj T*
+(4. Sort eigenvectors in descending order of their eigenvalues. The first principal) Tj T*
+(component PC1 points in the direction of maximum variance.) Tj T*
+(5. The Explained Variance Ratio for component k is lambda_k / sum\(lambda_i\). The scree) Tj T*
+(plot visualizes the cumulative variance explained to select the number of components.) Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 2513 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 2: REGRESSION, REGULARIZATION & ENSEMBLE TREES \(Page 2\)) Tj T*
+() Tj T*
+([Chapter 2: Supervised Learning · Section 2.1 · Page 2]) Tj T*
+(Ordinary Least Squares \(OLS\) regression models continuous targets: y = X * beta +) Tj T*
+(epsilon.) Tj T*
+(The Gauss-Markov theorem states that under five classic assumptions \(linearity in) Tj T*
+(parameters, strict exogeneity E[epsilon|X] = 0, no perfect multicollinearity,) Tj T*
+(homoscedasticity Var\(epsilon|X\) = sigma^2, and no autocorrelation\), the OLS estimator) Tj T*
+(beta_hat = \(X^T * X\)^\(-1\) * X^T * y is the Best Linear Unbiased Estimator \(BLUE\).) Tj T*
+(Multicollinearity occurs when predictor variables are highly correlated, causing \(X^T) Tj T*
+(* X\) to become ill-conditioned, inflating standard errors of coefficients. It is) Tj T*
+(diagnosed using the Variance Inflation Factor: VIF_j = 1 / \(1 - R_j^2\). A VIF > 5 to) Tj T*
+(10 indicates severe multicollinearity.) Tj T*
+() Tj T*
+([Chapter 2: Supervised Learning · Section 2.2 · Page 2]) Tj T*
+(Regularization prevents overfitting by penalizing large coefficient magnitudes:) Tj T*
+(- Ridge Regression \(L2 penalty\): Minimizes ||y - X*beta||^2 + lambda * sum\(beta_j^2\).) Tj T*
+(Shrinks coefficients toward zero, handling multicollinearity, but retains all features) Tj T*
+(\(no sparsity\).) Tj T*
+(- Lasso Regression \(L1 penalty\): Minimizes ||y - X*beta||^2 + lambda * sum\(|beta_j|\).) Tj T*
+(The sharp diamond geometry of the L1 ball drives non-informative feature weights) Tj T*
+(strictly to zero, performing automated feature selection.) Tj T*
+(- ElasticNet combines both penalties: lambda_1 * ||beta||_1 + lambda_2 * ||beta||_2^2,) Tj T*
+(ideal when features are correlated in groups.) Tj T*
+() Tj T*
+([Chapter 2: Supervised Learning · Section 2.3 · Page 2]) Tj T*
+(Tree ensembles improve predictive stability:) Tj T*
+(- Random Forest applies Bootstrap Aggregation \(Bagging\) to decision trees. It trains B) Tj T*
+(independent trees on bootstrapped data subsets, randomly selecting a subset of) Tj T*
+(features \(sqrt\(p\)\) at each split. Averaging decorrelates individual trees and reduces) Tj T*
+(model variance without increasing bias.) Tj T*
+(- Gradient Boosted Decision Trees \(XGBoost, LightGBM\) build trees sequentially in a) Tj T*
+(forward stage-wise manner, where each subsequent tree fits the negative gradient) Tj T*
+(\(pseudo-residuals\) of the loss function with respect to the previous ensemble) Tj T*
+(predictions.) Tj T*
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 2587 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 3: DIAGNOSTIC METRICS & BIAS-VARIANCE TRADEOFF \(Page 3\)) Tj T*
+() Tj T*
+([Chapter 3: Model Evaluation · Section 3.1 · Page 3]) Tj T*
+(Evaluating classification models requires specialized metrics beyond simple accuracy,) Tj T*
+(especially in imbalanced datasets \(e.g., fraud detection with 99% negative class\):) Tj T*
+(- Precision = TP / \(TP + FP\): Proportion of predicted positive instances that are) Tj T*
+(truly positive. Focuses on minimizing False Positives \(crucial in spam detection\).) Tj T*
+(- Recall \(Sensitivity\) = TP / \(TP + FN\): Proportion of actual positive instances) Tj T*
+(correctly identified. Focuses on minimizing False Negatives \(critical in disease) Tj T*
+(diagnosis\).) Tj T*
+(- F1-Score: The harmonic mean of Precision and Recall: F1 = 2 * \(Precision * Recall\) /) Tj T*
+(\(Precision + Recall\). The harmonic mean severely penalizes extreme disparities between) Tj T*
+(precision and recall compared to the arithmetic mean.) Tj T*
+(- Specificity = TN / \(TN + FP\): True negative rate.) Tj T*
+() Tj T*
+([Chapter 3: Model Evaluation · Section 3.2 · Page 3]) Tj T*
+(ROC and PR Curves:) Tj T*
+(The Receiver Operating Characteristic \(ROC\) curve plots True Positive Rate \(Recall\) vs) Tj T*
+(False Positive Rate \(1 - Specificity\) across all discrimination thresholds.) Tj T*
+(The Area Under the ROC Curve \(AUC-ROC\) represents the probability that the classifier) Tj T*
+(will rank a randomly chosen positive instance higher than a randomly chosen negative) Tj T*
+(instance.) Tj T*
+(However, for severe class imbalance, ROC curves present an overly optimistic) Tj T*
+(assessment because the large number of True Negatives depresses the False Positive) Tj T*
+(Rate. The Precision-Recall \(PR\) Curve is strictly preferred for imbalanced data) Tj T*
+(evaluation.) Tj T*
+() Tj T*
+([Chapter 3: Model Evaluation · Section 3.3 · Page 3]) Tj T*
+(The Bias-Variance Decomposition expresses Expected Test Error as:) Tj T*
+(E[Loss] = Bias^2\(f_hat\) + Variance\(f_hat\) + Irreducible Error \(sigma^2\)) Tj T*
+(- High Bias \(Underfitting\): The model is too simple to capture underlying patterns) Tj T*
+(\(e.g., linear model on quadratic data\). Symptoms: High training error and high test) Tj T*
+(error. Remedy: Add features, increase model complexity, decrease regularization.) Tj T*
+(- High Variance \(Overfitting\): The model memorizes training noise. Symptoms: Low) Tj T*
+(training error but high test error. Remedy: Collect more data, reduce features,) Tj T*
+(increase regularization, or use ensemble bagging.) Tj T*
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 2069 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 4: UNSUPERVISED CLUSTERING & TIME SERIES ANALYSIS \(Page 4\)) Tj T*
+() Tj T*
+([Chapter 4: Clustering & Time Series · Section 4.1 · Page 4]) Tj T*
+(Unsupervised Clustering groups unlabeled data points based on geometric proximity.) Tj T*
+(K-Means Clustering partitions n observations into k clusters by minimizing Within-) Tj T*
+(Cluster Sum of Squares \(WCSS, or inertia\):) Tj T*
+(WCSS = sum_i sum_{x in S_i} ||x - mu_i||^2) Tj T*
+(Algorithm:) Tj T*
+(1. Initialize k cluster centroids randomly \(or via K-Means++ to disperse initial) Tj T*
+(centroids\).) Tj T*
+(2. Assignment Step: Assign each observation to its closest centroid using Euclidean) Tj T*
+(distance.) Tj T*
+(3. Update Step: Recompute each centroid as the arithmetic mean of all assigned) Tj T*
+(observations.) Tj T*
+(4. Repeat until centroid coordinates converge.) Tj T*
+(The optimal number of clusters k is determined via the Elbow Method \(identifying the) Tj T*
+(point of diminishing WCSS returns\) and the Silhouette Score s\(i\) = \(b\(i\) - a\(i\)\) /) Tj T*
+(max\(a\(i\), b\(i\)\), where a\(i\) is mean intra-cluster distance and b\(i\) is mean nearest-) Tj T*
+(cluster distance.) Tj T*
+() Tj T*
+([Chapter 4: Clustering & Time Series · Section 4.2 · Page 4]) Tj T*
+(Time Series Analysis and Stationarity:) Tj T*
+(A time series is weakly \(covariance\) stationary if:) Tj T*
+(1. Mean is constant over time: E[Y_t] = mu for all t.) Tj T*
+(2. Variance is constant over time: Var\(Y_t\) = sigma^2 for all t \(homoscedasticity\).) Tj T*
+(3. Autocovariance depends only on the lag k, not time t: Cov\(Y_t, Y_{t-k}\) = gamma_k.) Tj T*
+(Non-stationary series containing unit roots can produce spurious regressions. The) Tj T*
+(Augmented Dickey-Fuller \(ADF\) test checks the null hypothesis that a unit root is) Tj T*
+(present \(non-stationary\). If p-value < 0.05, the null hypothesis is rejected and the) Tj T*
+(series is stationary. Differencing \(Y'_t = Y_t - Y_{t-1}\) transforms non-stationary) Tj T*
+(series into stationary series for ARIMA modeling.) Tj T*
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000002822 00000 n 
+0000002948 00000 n 
+0000005513 00000 n 
+0000005639 00000 n 
+0000008278 00000 n 
+0000008404 00000 n 
+0000010526 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+10654
+%%EOF

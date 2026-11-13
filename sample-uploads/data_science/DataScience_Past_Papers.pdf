@@ -1,0 +1,82 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2634 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(EXAMINATION BOARD: Department of Data Science & Quantitative Finance) Tj T*
+(SUBJECT: Advanced Data Science & Statistical Learning \(Annual Comprehensive) Tj T*
+(Examination\)) Tj T*
+(EXAM CODES: DS-2023, DS-2024, DS-2025 · Total Marks: 100) Tj T*
+() Tj T*
+(Question 1 \(2024 Exam · 5 Marks\):) Tj T*
+(Explain Tukey's Interquartile Range \(IQR\) method for outlier detection. How are inner) Tj T*
+(and outer fences defined mathematically, and why is IQR preferred over standard) Tj T*
+(deviation for skewed distributions?) Tj T*
+() Tj T*
+(Question 2 \(2023 Exam · 5 Marks\):) Tj T*
+(Derive the objective function of Principal Component Analysis \(PCA\). Explain why the) Tj T*
+(principal components correspond to the eigenvectors of the sample covariance matrix,) Tj T*
+(and what the eigenvalues represent.) Tj T*
+() Tj T*
+(Question 3 \(2024 Exam · 5 Marks\):) Tj T*
+(State the Gauss-Markov theorem for Ordinary Least Squares \(OLS\) regression and list) Tj T*
+(its core assumptions. What is the consequence on regression coefficients if the strict) Tj T*
+(exogeneity assumption is violated?) Tj T*
+() Tj T*
+(Question 4 \(2025 Exam · 5 Marks\):) Tj T*
+(Contrast Ridge Regression \(L2\) and Lasso Regression \(L1\). Explain geometrically why) Tj T*
+(Lasso produces sparse models with exact zero coefficients while Ridge only shrinks) Tj T*
+(coefficients asymptotically.) Tj T*
+() Tj T*
+(Question 5 \(2024 Exam · 6 Marks\):) Tj T*
+(A medical diagnostic model classifies a rare disease occurring in 0.5% of the) Tj T*
+(population. Explain why accuracy is a misleading metric for this problem. Define) Tj T*
+(Precision, Recall, and F1-Score, and explain why the Precision-Recall \(PR\) Curve is) Tj T*
+(superior to the ROC Curve in this scenario.) Tj T*
+() Tj T*
+(Question 6 \(2023 Exam · 4 Marks\):) Tj T*
+(Explain the Bias-Variance tradeoff. Write down the mathematical decomposition of) Tj T*
+(expected prediction error, and describe how diagnostic learning curves can identify) Tj T*
+(whether a model suffers from high bias or high variance.) Tj T*
+() Tj T*
+(Question 7 \(2025 Exam · 5 Marks\):) Tj T*
+(Describe the algorithmic steps of K-Means clustering. How does the K-Means++) Tj T*
+(initialization algorithm improve convergence over naive random centroid) Tj T*
+(initialization?) Tj T*
+() Tj T*
+(Question 8 \(2025 Exam · 5 Marks\):) Tj T*
+(Define covariance stationarity in a time series. State the three conditions required) Tj T*
+(for a series to be stationary, and explain how the Augmented Dickey-Fuller \(ADF\)) Tj T*
+(hypothesis test determines if differencing is necessary.) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000002871 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2997
+%%EOF

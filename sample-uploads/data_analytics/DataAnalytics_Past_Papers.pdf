@@ -1,0 +1,77 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2311 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(EXAMINATION BOARD: Center for Business Analytics & Enterprise Intelligence) Tj T*
+(SUBJECT: Business Intelligence, SQL & Data Analytics \(Professional Assessment Paper\)) Tj T*
+(EXAM CODES: DA-2023, DA-2024, DA-2025 · Total Marks: 100) Tj T*
+() Tj T*
+(Question 1 \(2024 Exam · 4 Marks\):) Tj T*
+(Differentiate between UNION and UNION ALL in SQL. Explain the difference in execution) Tj T*
+(behavior and explain why UNION ALL is preferred in high-performance ETL pipelines.) Tj T*
+() Tj T*
+(Question 2 \(2024 Exam · 5 Marks\):) Tj T*
+(Explain the differences between ROW_NUMBER\(\), RANK\(\), and DENSE_RANK\(\) in SQL window) Tj T*
+(functions. Write an example result set when three students tie for second place with a) Tj T*
+(score of 95.) Tj T*
+() Tj T*
+(Question 3 \(2023 Exam · 5 Marks\):) Tj T*
+(Contrast OLTP databases with OLAP data warehouses. Why is 3rd Normal Form \(3NF\) ideal) Tj T*
+(for OLTP systems but counter-productive for high-volume analytical queries?) Tj T*
+() Tj T*
+(Question 4 \(2025 Exam · 5 Marks\):) Tj T*
+(Explain Kimball's dimensional modeling technique. Define Fact tables and Dimension) Tj T*
+(tables, and distinguish between Additive, Semi-Additive, and Non-Additive facts with) Tj T*
+(concrete examples.) Tj T*
+() Tj T*
+(Question 5 \(2024 Exam · 5 Marks\):) Tj T*
+(Explain the difference between Slowly Changing Dimension \(SCD\) Type 1 and Type 2. What) Tj T*
+(columns must be included in a Dimension table to support SCD Type 2 historical) Tj T*
+(tracking?) Tj T*
+() Tj T*
+(Question 6 \(2025 Exam · 4 Marks\):) Tj T*
+(Define Customer Acquisition Cost \(CAC\) and Customer Lifetime Value \(LTV\). What is) Tj T*
+(considered an ideal LTV:CAC ratio for sustainable growth, and what does an LTV:CAC) Tj T*
+(ratio below 1.0 signify?) Tj T*
+() Tj T*
+(Question 7 \(2023 Exam · 4 Marks\):) Tj T*
+(What is Net Revenue Retention \(NRR\) and how is it calculated? Why is an NRR above 100%) Tj T*
+(considered the holy grail of SaaS unit economics?) Tj T*
+() Tj T*
+(Question 8 \(2025 Exam · 4 Marks\):) Tj T*
+(According to visual perception research \(Cleveland & McGill\), which visual encodings) Tj T*
+(are most accurately perceived by human observers? Explain why 3D pie charts should be) Tj T*
+(avoided in executive business reporting.) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000002548 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2674
+%%EOF

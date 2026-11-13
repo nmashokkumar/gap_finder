@@ -1,0 +1,212 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2443 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 1: ADVANCED SQL & WINDOW ANALYTICS \(Page 1\)) Tj T*
+() Tj T*
+([Chapter 1: Advanced SQL · Section 1.1 · Page 1]) Tj T*
+(SQL is the cornerstone of enterprise data retrieval and analytics.) Tj T*
+(Relational Joins combine tables horizontally on predicate keys. A Left Outer Join) Tj T*
+(preserves all records from the left table regardless of matching records in the right) Tj T*
+(table, populating unmatched right columns with NULL.) Tj T*
+(Set Operations combine queries vertically:) Tj T*
+(- UNION merges row sets and runs an implicit DISTINCT sort to eliminate duplicate) Tj T*
+(tuples.) Tj T*
+(- UNION ALL appends row sets directly without deduplication, preserving cardinality) Tj T*
+(and executing with superior performance and lower memory overhead.) Tj T*
+(- INTERSECT returns rows present in both queries; EXCEPT \(or MINUS\) returns rows) Tj T*
+(present in the first query but absent in the second.) Tj T*
+() Tj T*
+([Chapter 1: Advanced SQL · Section 1.2 · Page 1]) Tj T*
+(Window \(Analytic\) Functions compute calculations across a set of table rows related to) Tj T*
+(the current row without collapsing the rows into a single summary output:) Tj T*
+(Syntax: FUNCTION\(\) OVER \(PARTITION BY partition_col ORDER BY sort_col ROWS BETWEEN ...) Tj T*
+(AND ...\)) Tj T*
+(Ranking Differences:) Tj T*
+(- ROW_NUMBER\(\): Assigns a unique sequential integer \(1, 2, 3, 4\) to every row) Tj T*
+(regardless of ties.) Tj T*
+(- RANK\(\): Assigns the same rank to identical values, but skips subsequent rank numbers) Tj T*
+(\(e.g., ties at 2 result in 1, 2, 2, 4\).) Tj T*
+(- DENSE_RANK\(\): Assigns the same rank to identical values without skipping numbers) Tj T*
+(\(e.g., 1, 2, 2, 3\).) Tj T*
+(Sliding Window Frames \(e.g., ROWS BETWEEN 6 PRECEDING AND CURRENT ROW\) compute moving) Tj T*
+(averages and rolling sums over temporal partitions.) Tj T*
+() Tj T*
+([Chapter 1: Advanced SQL · Section 1.3 · Page 1]) Tj T*
+(Common Table Expressions \(CTEs\) define temporary named result sets using the WITH) Tj T*
+(keyword:) Tj T*
+(WITH RegionalSales AS \(SELECT region, SUM\(amount\) AS total FROM sales GROUP BY region\)) Tj T*
+(CTEs improve modularity and readability compared to nested subqueries. A Recursive CTE) Tj T*
+(references itself to traverse hierarchical data structures \(such as organizational) Tj T*
+(management charts or bill-of-materials trees\) until a termination condition is met.) Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 2272 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 2: DATA WAREHOUSING & KIMBALL DIMENSIONAL MODELING \(Page 2\)) Tj T*
+() Tj T*
+([Chapter 2: Data Warehousing · Section 2.1 · Page 2]) Tj T*
+(Enterprise data architectures distinguish between OLTP and OLAP systems:) Tj T*
+(- Online Transaction Processing \(OLTP\): Optimized for rapid, atomic) Tj T*
+(insert/update/delete operations. Data is normalized to 3rd Normal Form \(3NF\) to) Tj T*
+(eliminate redundant write anomalies and ensure ACID compliance.) Tj T*
+(- Online Analytical Processing \(OLAP\): Optimized for complex analytical aggregations) Tj T*
+(and historical reporting. Data is denormalized into multidimensional schemas \(Star or) Tj T*
+(Snowflake\) to minimize expensive multi-table joins.) Tj T*
+() Tj T*
+([Chapter 2: Data Warehousing · Section 2.2 · Page 2]) Tj T*
+(Kimball Dimensional Modeling organizes analytical data into two fundamental) Tj T*
+(structures:) Tj T*
+(1. Fact Tables: Store numeric measurements produced by business events \(e.g.,) Tj T*
+(FactSales, FactWebsiteClicks\). Fact measures are classified as:) Tj T*
+(   - Additive: Can be summed across all dimensions \(e.g., sales revenue, units sold\).) Tj T*
+(   - Semi-Additive: Can be summed across some dimensions but not time \(e.g., bank) Tj T*
+(account balances, inventory headcount\).) Tj T*
+(   - Non-Additive: Cannot be summed across any dimension \(e.g., unit price, profit) Tj T*
+(ratios\).) Tj T*
+(2. Dimension Tables: Store textual context and business attributes \(e.g., DimCustomer,) Tj T*
+(DimStore, DimDate\).) Tj T*
+() Tj T*
+([Chapter 2: Data Warehousing · Section 2.3 · Page 2]) Tj T*
+(Slowly Changing Dimensions \(SCD\) manage attribute modifications over time:) Tj T*
+(- SCD Type 1: Overwrites existing attribute values with new data. Historical context) Tj T*
+(is lost, but schema remains simple.) Tj T*
+(- SCD Type 2: Preserves complete historical accuracy by creating a new dimension row) Tj T*
+(whenever an attribute changes. Each row contains a surrogate primary key, the natural) Tj T*
+(business key, Effective Start Date, Effective End Date, and a Current Active Flag) Tj T*
+(\(IsCurrent = 1\).) Tj T*
+(- SCD Type 3: Tracks previous values by adding a dedicated "Previous Attribute" column) Tj T*
+(in the same row.) Tj T*
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 1952 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 3: BUSINESS METRICS & UNIT ECONOMICS \(Page 3\)) Tj T*
+() Tj T*
+([Chapter 3: Business Metrics · Section 3.1 · Page 3]) Tj T*
+(Data analysts translate raw database records into strategic business performance) Tj T*
+(metrics:) Tj T*
+(- Customer Acquisition Cost \(CAC\): Total sales & marketing spend over a defined period) Tj T*
+(divided by the number of new customers acquired: CAC = Total Marketing & Sales Costs /) Tj T*
+(New Customers Acquired.) Tj T*
+(- Customer Lifetime Value \(CLV / LTV\): Projected net gross margin contribution of a) Tj T*
+(customer over their entire relationship:) Tj T*
+(  LTV = \(Average Order Value * Purchase Frequency * Gross Margin %\) / Churn Rate.) Tj T*
+(  Healthy SaaS and subscription business models target an LTV:CAC ratio of at least) Tj T*
+(3:1.) Tj T*
+(- Churn Rate: Percentage of customers or recurring revenue lost during a specific) Tj T*
+(interval:) Tj T*
+(  Customer Churn = \(Customers Lost during Period\) / \(Customers at Start of Period\).) Tj T*
+() Tj T*
+([Chapter 3: Business Metrics · Section 3.2 · Page 3]) Tj T*
+(Revenue and Cohort Analysis:) Tj T*
+(- Monthly Recurring Revenue \(MRR\): Predictable subscription revenue normalized to a) Tj T*
+(monthly interval.) Tj T*
+(- Net Revenue Retention \(NRR\): Measures the percentage of recurring revenue retained) Tj T*
+(from existing customers over a period, incorporating expansions \(upsells, cross-sells\)) Tj T*
+(minus downgrades and cancellations:) Tj T*
+(  NRR = \(Starting MRR + Expansion MRR - Contraction MRR - Churn MRR\) / Starting MRR *) Tj T*
+(100.) Tj T*
+(  An NRR > 100% indicates that expansion revenue outpaces churn, yielding organic) Tj T*
+(company growth without acquiring a single new customer.) Tj T*
+(- Cohort Retention Curves plot customer retention percentage over progressive months) Tj T*
+(grouped by signup month, isolating product changes from acquisition marketing spikes.) Tj T*
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 1962 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 4: VISUAL ANALYTICS & EXECUTIVE REPORTING \(Page 4\)) Tj T*
+() Tj T*
+([Chapter 4: Visual Analytics · Section 4.1 · Page 4]) Tj T*
+(Visual encoding maps data attributes to perceptual graphical properties \(position,) Tj T*
+(length, angle, color saturation, shape\).) Tj T*
+(Research by Cleveland and McGill establishes that human visual perception decodes) Tj T*
+(position along a common scale with the highest accuracy, followed by length, angle,) Tj T*
+(area, and color saturation:) Tj T*
+(- Bar Charts: Superior for comparing discrete categorical magnitudes along a common) Tj T*
+(baseline.) Tj T*
+(- Line Charts: Optimal for displaying continuous temporal trends.) Tj T*
+(- Scatter Plots: Best for discovering correlation, clustering, and outlier) Tj T*
+(distributions between two continuous variables.) Tj T*
+(- Avoid 3D charts, pie charts with more than 4 slices \(since angles and areas are) Tj T*
+(difficult for human eyes to compare accurately\), and dual-axis charts with deceptive) Tj T*
+(mismatched scale ranges.) Tj T*
+() Tj T*
+([Chapter 4: Visual Analytics · Section 4.2 · Page 4]) Tj T*
+(Dashboard Architecture and Diagnostic Flow:) Tj T*
+(An effective executive dashboard follows the Visual Information-Seeking Mantra \(Ben) Tj T*
+(Shneiderman\): "Overview first, zoom and filter, then details-on-demand.") Tj T*
+(1. Top Tier: Strategic high-level KPI summary cards displaying current metric, target) Tj T*
+(variance, and direction trend indicators.) Tj T*
+(2. Middle Tier: Interactive comparative visuals \(e.g., regional breakdown, monthly) Tj T*
+(trend\) allowing users to filter by segment.) Tj T*
+(3. Bottom Tier: Granular drill-down tables providing exact transactional details when) Tj T*
+(requested.) Tj T*
+(Actionable dashboards provide diagnosis rather than mere descriptive metrics,) Tj T*
+(explicitly answering 'Why did this metric change?' and guiding operational) Tj T*
+(interventions.) Tj T*
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000002699 00000 n 
+0000002825 00000 n 
+0000005149 00000 n 
+0000005275 00000 n 
+0000007279 00000 n 
+0000007405 00000 n 
+0000009420 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+9548
+%%EOF

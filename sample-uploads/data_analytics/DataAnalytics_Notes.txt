@@ -1,0 +1,81 @@
+CHAPTER 1: ADVANCED SQL & WINDOW ANALYTICS (Page 1)
+
+[Chapter 1: Advanced SQL · Section 1.1 · Page 1]
+SQL is the cornerstone of enterprise data retrieval and analytics.
+Relational Joins combine tables horizontally on predicate keys. A Left Outer Join preserves all records from the left table regardless of matching records in the right table, populating unmatched right columns with NULL.
+Set Operations combine queries vertically:
+- UNION merges row sets and runs an implicit DISTINCT sort to eliminate duplicate tuples.
+- UNION ALL appends row sets directly without deduplication, preserving cardinality and executing with superior performance and lower memory overhead.
+- INTERSECT returns rows present in both queries; EXCEPT (or MINUS) returns rows present in the first query but absent in the second.
+
+[Chapter 1: Advanced SQL · Section 1.2 · Page 1]
+Window (Analytic) Functions compute calculations across a set of table rows related to the current row without collapsing the rows into a single summary output:
+Syntax: FUNCTION() OVER (PARTITION BY partition_col ORDER BY sort_col ROWS BETWEEN ... AND ...)
+Ranking Differences:
+- ROW_NUMBER(): Assigns a unique sequential integer (1, 2, 3, 4) to every row regardless of ties.
+- RANK(): Assigns the same rank to identical values, but skips subsequent rank numbers (e.g., ties at 2 result in 1, 2, 2, 4).
+- DENSE_RANK(): Assigns the same rank to identical values without skipping numbers (e.g., 1, 2, 2, 3).
+Sliding Window Frames (e.g., ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) compute moving averages and rolling sums over temporal partitions.
+
+[Chapter 1: Advanced SQL · Section 1.3 · Page 1]
+Common Table Expressions (CTEs) define temporary named result sets using the WITH keyword:
+WITH RegionalSales AS (SELECT region, SUM(amount) AS total FROM sales GROUP BY region)
+CTEs improve modularity and readability compared to nested subqueries. A Recursive CTE references itself to traverse hierarchical data structures (such as organizational management charts or bill-of-materials trees) until a termination condition is met.
+
+CHAPTER 2: DATA WAREHOUSING & KIMBALL DIMENSIONAL MODELING (Page 2)
+
+[Chapter 2: Data Warehousing · Section 2.1 · Page 2]
+Enterprise data architectures distinguish between OLTP and OLAP systems:
+- Online Transaction Processing (OLTP): Optimized for rapid, atomic insert/update/delete operations. Data is normalized to 3rd Normal Form (3NF) to eliminate redundant write anomalies and ensure ACID compliance.
+- Online Analytical Processing (OLAP): Optimized for complex analytical aggregations and historical reporting. Data is denormalized into multidimensional schemas (Star or Snowflake) to minimize expensive multi-table joins.
+
+[Chapter 2: Data Warehousing · Section 2.2 · Page 2]
+Kimball Dimensional Modeling organizes analytical data into two fundamental structures:
+1. Fact Tables: Store numeric measurements produced by business events (e.g., FactSales, FactWebsiteClicks). Fact measures are classified as:
+   - Additive: Can be summed across all dimensions (e.g., sales revenue, units sold).
+   - Semi-Additive: Can be summed across some dimensions but not time (e.g., bank account balances, inventory headcount).
+   - Non-Additive: Cannot be summed across any dimension (e.g., unit price, profit ratios).
+2. Dimension Tables: Store textual context and business attributes (e.g., DimCustomer, DimStore, DimDate).
+
+[Chapter 2: Data Warehousing · Section 2.3 · Page 2]
+Slowly Changing Dimensions (SCD) manage attribute modifications over time:
+- SCD Type 1: Overwrites existing attribute values with new data. Historical context is lost, but schema remains simple.
+- SCD Type 2: Preserves complete historical accuracy by creating a new dimension row whenever an attribute changes. Each row contains a surrogate primary key, the natural business key, Effective Start Date, Effective End Date, and a Current Active Flag (IsCurrent = 1).
+- SCD Type 3: Tracks previous values by adding a dedicated "Previous Attribute" column in the same row.
+
+CHAPTER 3: BUSINESS METRICS & UNIT ECONOMICS (Page 3)
+
+[Chapter 3: Business Metrics · Section 3.1 · Page 3]
+Data analysts translate raw database records into strategic business performance metrics:
+- Customer Acquisition Cost (CAC): Total sales & marketing spend over a defined period divided by the number of new customers acquired: CAC = Total Marketing & Sales Costs / New Customers Acquired.
+- Customer Lifetime Value (CLV / LTV): Projected net gross margin contribution of a customer over their entire relationship:
+  LTV = (Average Order Value * Purchase Frequency * Gross Margin %) / Churn Rate.
+  Healthy SaaS and subscription business models target an LTV:CAC ratio of at least 3:1.
+- Churn Rate: Percentage of customers or recurring revenue lost during a specific interval:
+  Customer Churn = (Customers Lost during Period) / (Customers at Start of Period).
+
+[Chapter 3: Business Metrics · Section 3.2 · Page 3]
+Revenue and Cohort Analysis:
+- Monthly Recurring Revenue (MRR): Predictable subscription revenue normalized to a monthly interval.
+- Net Revenue Retention (NRR): Measures the percentage of recurring revenue retained from existing customers over a period, incorporating expansions (upsells, cross-sells) minus downgrades and cancellations:
+  NRR = (Starting MRR + Expansion MRR - Contraction MRR - Churn MRR) / Starting MRR * 100.
+  An NRR > 100% indicates that expansion revenue outpaces churn, yielding organic company growth without acquiring a single new customer.
+- Cohort Retention Curves plot customer retention percentage over progressive months grouped by signup month, isolating product changes from acquisition marketing spikes.
+
+CHAPTER 4: VISUAL ANALYTICS & EXECUTIVE REPORTING (Page 4)
+
+[Chapter 4: Visual Analytics · Section 4.1 · Page 4]
+Visual encoding maps data attributes to perceptual graphical properties (position, length, angle, color saturation, shape).
+Research by Cleveland and McGill establishes that human visual perception decodes position along a common scale with the highest accuracy, followed by length, angle, area, and color saturation:
+- Bar Charts: Superior for comparing discrete categorical magnitudes along a common baseline.
+- Line Charts: Optimal for displaying continuous temporal trends.
+- Scatter Plots: Best for discovering correlation, clustering, and outlier distributions between two continuous variables.
+- Avoid 3D charts, pie charts with more than 4 slices (since angles and areas are difficult for human eyes to compare accurately), and dual-axis charts with deceptive mismatched scale ranges.
+
+[Chapter 4: Visual Analytics · Section 4.2 · Page 4]
+Dashboard Architecture and Diagnostic Flow:
+An effective executive dashboard follows the Visual Information-Seeking Mantra (Ben Shneiderman): "Overview first, zoom and filter, then details-on-demand."
+1. Top Tier: Strategic high-level KPI summary cards displaying current metric, target variance, and direction trend indicators.
+2. Middle Tier: Interactive comparative visuals (e.g., regional breakdown, monthly trend) allowing users to filter by segment.
+3. Bottom Tier: Granular drill-down tables providing exact transactional details when requested.
+Actionable dashboards provide diagnosis rather than mere descriptive metrics, explicitly answering 'Why did this metric change?' and guiding operational interventions.

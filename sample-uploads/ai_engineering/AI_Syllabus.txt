@@ -1,0 +1,27 @@
+COURSE CODE: CS-602
+COURSE TITLE: Artificial Intelligence, Deep Learning & LLM Systems
+DEPARTMENT: School of Computing & Artificial Intelligence
+
+MODULE 1: SEARCH, LOGIC & KNOWLEDGE REPRESENTATION
+1.1 Uninformed vs Informed Search: Breadth-First Search (BFS), Depth-First Search (DFS), Uniform-Cost Search.
+1.2 Heuristic Search: A* Search algorithm, admissibility and consistency of heuristics, Greedy Best-First Search.
+1.3 Adversarial Search & Games: Minimax algorithm, Alpha-Beta pruning, game tree complexity.
+1.4 Logic & Reasoning: First-Order Logic (FOL), resolution refutation, knowledge bases, ontological engineering.
+
+MODULE 2: DEEP LEARNING ARCHITECTURES & TRAINING DYNAMICS
+2.1 Feedforward & Backpropagation: Multi-layer perceptrons, forward pass matrix math, reverse-mode autodiff, chain rule.
+2.2 Activation Functions & Gradient Flow: Sigmoid vanishing gradient problem, Tanh, ReLU, Leaky ReLU, GELU.
+2.3 Optimization Algorithms: Stochastic Gradient Descent (SGD) with momentum, RMSprop, Adam, AdamW (weight decay separation), learning rate schedulers.
+2.4 Convolutional & Recurrent Networks: Spatial convolutions, receptive fields, pooling; Vanishing gradients in RNNs, LSTMs, GRUs.
+
+MODULE 3: ATTENTION MECHANISMS & TRANSFORMER ARCHITECTURES
+3.1 Self-Attention Formulation: Query, Key, Value linear projections, Scaled Dot-Product Attention: Attention(Q,K,V) = softmax(QK^T / sqrt(d_k)) * V.
+3.2 Multi-Head Attention: Subspace representations, concatenation, linear projection.
+3.3 Modern Transformer Architectures: Encoder-only (BERT), Decoder-only autoregressive (GPT, LLaMA), Encoder-Decoder (T5).
+3.4 Positional Encodings: Absolute sinusoidal embeddings vs Rotary Positional Embeddings (RoPE), KV-caching during inference.
+
+MODULE 4: RETRIEVAL-AUGMENTED GENERATION (RAG) & LLM REASONING
+4.1 The RAG Architecture: Dense embeddings (bi-encoders), vector similarity metrics (Cosine similarity, Dot Product), Approximate Nearest Neighbor (ANN) index (HNSW, IVF-PQ).
+4.2 Chunking Strategies & Ingestion: Fixed-size with overlap, semantic recursive chunking, metadata injection.
+4.3 Hallucination Mitigation & Grounding: In-context grounding, source citation attribution, retrieval guardrails (cosine similarity thresholding).
+4.4 Fine-Tuning vs RAG: Parameter-Efficient Fine-Tuning (PEFT, LoRA, QLoRA), when to use RAG (dynamic private data) vs LoRA (style/domain terminology).

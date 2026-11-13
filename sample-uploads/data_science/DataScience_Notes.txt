@@ -1,0 +1,82 @@
+CHAPTER 1: DATA PREPROCESSING & PRINCIPAL COMPONENT ANALYSIS (Page 1)
+
+[Chapter 1: EDA & Feature Engineering · Section 1.1 · Page 1]
+Exploratory Data Analysis (EDA) inspects distributions and relationships before modeling.
+The Interquartile Range (IQR) equals Q3 - Q1, spanning the middle 50% of the distribution. Tukey outlier fences identify data points falling below Q1 - 1.5 * IQR or above Q3 + 1.5 * IQR as outliers. Extreme outliers lie beyond 3.0 * IQR.
+Missing data mechanisms fall into three categories:
+1. Missing Completely at Random (MCAR): Missingness is independent of both observed and unobserved variables.
+2. Missing at Random (MAR): Missingness is systematically related to observed variables, but not the missing value itself.
+3. Missing Not at Random (MNAR): Missingness depends directly on the unobserved missing value (e.g., highest earners refusing to report income).
+
+[Chapter 1: EDA & Feature Engineering · Section 1.2 · Page 1]
+Feature scaling aligns variable magnitudes before gradient-based optimization or distance metrics:
+- Min-Max Normalization: x_norm = (x - x_min) / (x_max - x_min), binding values to [0, 1]. Highly sensitive to outliers.
+- Standard Z-Score Standardization: x_std = (x - mu) / sigma, centering at zero mean with unit standard deviation. Preferred for algorithms assuming normal distribution (Linear models, PCA, Logistic Regression).
+
+[Chapter 1: EDA & Feature Engineering · Section 1.3 · Page 1]
+Principal Component Analysis (PCA) is an unsupervised linear dimensionality reduction technique that maximizes variance while minimizing reconstruction error:
+1. Standardize the data matrix X (n observations, p features) so each feature has mean 0 and variance 1.
+2. Compute the p x p sample covariance matrix: Sigma = (1 / (n - 1)) * X^T * X.
+3. Calculate the eigenvalues lambda_i and eigenvectors v_i of Sigma: Sigma * v_i = lambda_i * v_i.
+4. Sort eigenvectors in descending order of their eigenvalues. The first principal component PC1 points in the direction of maximum variance.
+5. The Explained Variance Ratio for component k is lambda_k / sum(lambda_i). The scree plot visualizes the cumulative variance explained to select the number of components.
+
+CHAPTER 2: REGRESSION, REGULARIZATION & ENSEMBLE TREES (Page 2)
+
+[Chapter 2: Supervised Learning · Section 2.1 · Page 2]
+Ordinary Least Squares (OLS) regression models continuous targets: y = X * beta + epsilon.
+The Gauss-Markov theorem states that under five classic assumptions (linearity in parameters, strict exogeneity E[epsilon|X] = 0, no perfect multicollinearity, homoscedasticity Var(epsilon|X) = sigma^2, and no autocorrelation), the OLS estimator beta_hat = (X^T * X)^(-1) * X^T * y is the Best Linear Unbiased Estimator (BLUE).
+Multicollinearity occurs when predictor variables are highly correlated, causing (X^T * X) to become ill-conditioned, inflating standard errors of coefficients. It is diagnosed using the Variance Inflation Factor: VIF_j = 1 / (1 - R_j^2). A VIF > 5 to 10 indicates severe multicollinearity.
+
+[Chapter 2: Supervised Learning · Section 2.2 · Page 2]
+Regularization prevents overfitting by penalizing large coefficient magnitudes:
+- Ridge Regression (L2 penalty): Minimizes ||y - X*beta||^2 + lambda * sum(beta_j^2). Shrinks coefficients toward zero, handling multicollinearity, but retains all features (no sparsity).
+- Lasso Regression (L1 penalty): Minimizes ||y - X*beta||^2 + lambda * sum(|beta_j|). The sharp diamond geometry of the L1 ball drives non-informative feature weights strictly to zero, performing automated feature selection.
+- ElasticNet combines both penalties: lambda_1 * ||beta||_1 + lambda_2 * ||beta||_2^2, ideal when features are correlated in groups.
+
+[Chapter 2: Supervised Learning · Section 2.3 · Page 2]
+Tree ensembles improve predictive stability:
+- Random Forest applies Bootstrap Aggregation (Bagging) to decision trees. It trains B independent trees on bootstrapped data subsets, randomly selecting a subset of features (sqrt(p)) at each split. Averaging decorrelates individual trees and reduces model variance without increasing bias.
+- Gradient Boosted Decision Trees (XGBoost, LightGBM) build trees sequentially in a forward stage-wise manner, where each subsequent tree fits the negative gradient (pseudo-residuals) of the loss function with respect to the previous ensemble predictions.
+
+CHAPTER 3: DIAGNOSTIC METRICS & BIAS-VARIANCE TRADEOFF (Page 3)
+
+[Chapter 3: Model Evaluation · Section 3.1 · Page 3]
+Evaluating classification models requires specialized metrics beyond simple accuracy, especially in imbalanced datasets (e.g., fraud detection with 99% negative class):
+- Precision = TP / (TP + FP): Proportion of predicted positive instances that are truly positive. Focuses on minimizing False Positives (crucial in spam detection).
+- Recall (Sensitivity) = TP / (TP + FN): Proportion of actual positive instances correctly identified. Focuses on minimizing False Negatives (critical in disease diagnosis).
+- F1-Score: The harmonic mean of Precision and Recall: F1 = 2 * (Precision * Recall) / (Precision + Recall). The harmonic mean severely penalizes extreme disparities between precision and recall compared to the arithmetic mean.
+- Specificity = TN / (TN + FP): True negative rate.
+
+[Chapter 3: Model Evaluation · Section 3.2 · Page 3]
+ROC and PR Curves:
+The Receiver Operating Characteristic (ROC) curve plots True Positive Rate (Recall) vs False Positive Rate (1 - Specificity) across all discrimination thresholds.
+The Area Under the ROC Curve (AUC-ROC) represents the probability that the classifier will rank a randomly chosen positive instance higher than a randomly chosen negative instance.
+However, for severe class imbalance, ROC curves present an overly optimistic assessment because the large number of True Negatives depresses the False Positive Rate. The Precision-Recall (PR) Curve is strictly preferred for imbalanced data evaluation.
+
+[Chapter 3: Model Evaluation · Section 3.3 · Page 3]
+The Bias-Variance Decomposition expresses Expected Test Error as:
+E[Loss] = Bias^2(f_hat) + Variance(f_hat) + Irreducible Error (sigma^2)
+- High Bias (Underfitting): The model is too simple to capture underlying patterns (e.g., linear model on quadratic data). Symptoms: High training error and high test error. Remedy: Add features, increase model complexity, decrease regularization.
+- High Variance (Overfitting): The model memorizes training noise. Symptoms: Low training error but high test error. Remedy: Collect more data, reduce features, increase regularization, or use ensemble bagging.
+
+CHAPTER 4: UNSUPERVISED CLUSTERING & TIME SERIES ANALYSIS (Page 4)
+
+[Chapter 4: Clustering & Time Series · Section 4.1 · Page 4]
+Unsupervised Clustering groups unlabeled data points based on geometric proximity.
+K-Means Clustering partitions n observations into k clusters by minimizing Within-Cluster Sum of Squares (WCSS, or inertia):
+WCSS = sum_i sum_{x in S_i} ||x - mu_i||^2
+Algorithm:
+1. Initialize k cluster centroids randomly (or via K-Means++ to disperse initial centroids).
+2. Assignment Step: Assign each observation to its closest centroid using Euclidean distance.
+3. Update Step: Recompute each centroid as the arithmetic mean of all assigned observations.
+4. Repeat until centroid coordinates converge.
+The optimal number of clusters k is determined via the Elbow Method (identifying the point of diminishing WCSS returns) and the Silhouette Score s(i) = (b(i) - a(i)) / max(a(i), b(i)), where a(i) is mean intra-cluster distance and b(i) is mean nearest-cluster distance.
+
+[Chapter 4: Clustering & Time Series · Section 4.2 · Page 4]
+Time Series Analysis and Stationarity:
+A time series is weakly (covariance) stationary if:
+1. Mean is constant over time: E[Y_t] = mu for all t.
+2. Variance is constant over time: Var(Y_t) = sigma^2 for all t (homoscedasticity).
+3. Autocovariance depends only on the lag k, not time t: Cov(Y_t, Y_{t-k}) = gamma_k.
+Non-stationary series containing unit roots can produce spurious regressions. The Augmented Dickey-Fuller (ADF) test checks the null hypothesis that a unit root is present (non-stationary). If p-value < 0.05, the null hypothesis is rejected and the series is stationary. Differencing (Y'_t = Y_t - Y_{t-1}) transforms non-stationary series into stationary series for ARIMA modeling.

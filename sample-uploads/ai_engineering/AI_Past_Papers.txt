@@ -1,0 +1,27 @@
+EXAMINATION BOARD: School of Computing & Artificial Intelligence
+SUBJECT: Artificial Intelligence & LLM Systems (Semester Final Examination)
+EXAM CODES: AI-2023, AI-2024, AI-2025 · Total Marks: 100
+
+Question 1 (2024 Exam · 5 Marks):
+Define admissibility and consistency of a heuristic function h(n) in the context of A* search. State the mathematical condition for consistency and explain why consistency guarantees optimality in graph search without reopening closed nodes.
+
+Question 2 (2024 Exam · 4 Marks):
+Explain the Alpha-Beta pruning procedure in two-player zero-sum games. State the condition under which a branch is pruned. What is the best-case time complexity of Alpha-Beta pruning with optimal move ordering?
+
+Question 3 (2023 Exam · 5 Marks):
+Explain the mathematical root cause of the Vanishing Gradient problem in Deep Neural Networks when using the Sigmoid activation function. Why does the ReLU activation function mitigate this problem, and what is the "Dying ReLU" issue?
+
+Question 4 (2025 Exam · 5 Marks):
+Compare standard Adam optimizer with AdamW. Why does standard L2 regularization behave incorrectly when coupled with adaptive moment estimation in Adam?
+
+Question 5 (2025 Exam · 6 Marks):
+Write down the Scaled Dot-Product Attention equation in Transformers. Explain the exact mathematical reason why the dot product (Q * K^T) is divided by the square root of d_k. What happens to the softmax gradients if this scaling factor is omitted?
+
+Question 6 (2024 Exam · 4 Marks):
+What is the purpose of the KV-Cache during autoregressive LLM decoding? How does it alter the computational complexity of generating the t-th token from scratch?
+
+Question 7 (2025 Exam · 6 Marks):
+Explain the end-to-end architecture of a Retrieval-Augmented Generation (RAG) system. Describe the three distinct phases (Ingestion, Retrieval, Generation) and explain how Cosine Similarity thresholding acts as a guardrail against hallucinations.
+
+Question 8 (2023 Exam · 5 Marks):
+Compare RAG with Parameter-Efficient Fine-Tuning (LoRA). When should an organization choose RAG over fine-tuning, and why is fine-tuning alone insufficient for factual recall in corporate settings?

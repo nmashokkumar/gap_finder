@@ -1,0 +1,27 @@
+EXAMINATION BOARD: Center for Business Analytics & Enterprise Intelligence
+SUBJECT: Business Intelligence, SQL & Data Analytics (Professional Assessment Paper)
+EXAM CODES: DA-2023, DA-2024, DA-2025 · Total Marks: 100
+
+Question 1 (2024 Exam · 4 Marks):
+Differentiate between UNION and UNION ALL in SQL. Explain the difference in execution behavior and explain why UNION ALL is preferred in high-performance ETL pipelines.
+
+Question 2 (2024 Exam · 5 Marks):
+Explain the differences between ROW_NUMBER(), RANK(), and DENSE_RANK() in SQL window functions. Write an example result set when three students tie for second place with a score of 95.
+
+Question 3 (2023 Exam · 5 Marks):
+Contrast OLTP databases with OLAP data warehouses. Why is 3rd Normal Form (3NF) ideal for OLTP systems but counter-productive for high-volume analytical queries?
+
+Question 4 (2025 Exam · 5 Marks):
+Explain Kimball's dimensional modeling technique. Define Fact tables and Dimension tables, and distinguish between Additive, Semi-Additive, and Non-Additive facts with concrete examples.
+
+Question 5 (2024 Exam · 5 Marks):
+Explain the difference between Slowly Changing Dimension (SCD) Type 1 and Type 2. What columns must be included in a Dimension table to support SCD Type 2 historical tracking?
+
+Question 6 (2025 Exam · 4 Marks):
+Define Customer Acquisition Cost (CAC) and Customer Lifetime Value (LTV). What is considered an ideal LTV:CAC ratio for sustainable growth, and what does an LTV:CAC ratio below 1.0 signify?
+
+Question 7 (2023 Exam · 4 Marks):
+What is Net Revenue Retention (NRR) and how is it calculated? Why is an NRR above 100% considered the holy grail of SaaS unit economics?
+
+Question 8 (2025 Exam · 4 Marks):
+According to visual perception research (Cleveland & McGill), which visual encodings are most accurately perceived by human observers? Explain why 3D pie charts should be avoided in executive business reporting.

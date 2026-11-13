@@ -1,0 +1,25 @@
+COURSE CODE: DA-401
+COURSE TITLE: Business Intelligence & Data Analytics: SQL, Warehousing & Visual Analytics
+DEPARTMENT: Center for Business Analytics & Enterprise Intelligence
+
+MODULE 1: ADVANCED SQL & RELATIONAL QUERYING
+1.1 Complex Joins & Set Operations: Inner, Left, Right, Full Outer Joins, Cross Joins, Self Joins; UNION vs UNION ALL, INTERSECT, EXCEPT.
+1.2 Aggregation & Grouping: GROUP BY, HAVING clause, aggregate functions (COUNT, SUM, AVG, MIN, MAX), NULL value semantics (COALESCE).
+1.3 Window (Analytic) Functions: ROW_NUMBER(), RANK(), DENSE_RANK(), NTILE(), OVER (PARTITION BY ... ORDER BY ...), sliding window frames.
+1.4 Common Table Expressions & Subqueries: Recursive CTEs, correlated subqueries vs non-correlated subqueries, query execution plans.
+
+MODULE 2: DATA WAREHOUSING & DIMENSIONAL MODELING
+2.1 OLTP vs OLAP: Transactional normalized databases (3NF) vs Analytical denormalized schemas.
+2.2 Kimball Dimensional Modeling: Star Schema, Snowflake Schema, Fact tables (additive, semi-additive, non-additive facts).
+2.3 Slowly Changing Dimensions (SCD): SCD Type 0 (fixed), SCD Type 1 (overwrite), SCD Type 2 (historical tracking with surrogate keys, start/end dates), SCD Type 3.
+2.4 Data Pipeline ETL vs ELT: Staging layers, data marts, data lakehouses, change data capture (CDC).
+
+MODULE 3: BUSINESS METRICS & KPI FORMULATION
+3.1 Financial & Operational KPIs: Customer Acquisition Cost (CAC), Customer Lifetime Value (CLV/LTV), Churn Rate (cohort retention curves).
+3.2 Revenue Analysis: Monthly Recurring Revenue (MRR), Net Revenue Retention (NRR), Average Order Value (AOV), Year-Over-Year (YoY) growth calculations.
+3.3 Funnel & Attribution Analysis: Conversion rate optimization, drop-off rates across multi-touch customer journeys.
+
+MODULE 4: DATA VISUALIZATION & EXECUTIVE DASHBOARDS
+4.1 Visual Encoding & Chart Selection: Bar vs Line vs Scatter vs Heatmap; avoiding chart junk and distorted axes.
+4.2 Interactive Dashboards: Drill-downs, cross-filtering, global parameter controls, dynamic tooltips.
+4.3 Storytelling with Data: Executive summaries, narrative flow, designing for decision-makers, actionable diagnostic callouts.

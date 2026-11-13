@@ -1,0 +1,77 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2566 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(COURSE CODE: DA-401) Tj T*
+(COURSE TITLE: Business Intelligence & Data Analytics: SQL, Warehousing & Visual) Tj T*
+(Analytics) Tj T*
+(DEPARTMENT: Center for Business Analytics & Enterprise Intelligence) Tj T*
+() Tj T*
+(MODULE 1: ADVANCED SQL & RELATIONAL QUERYING) Tj T*
+(1.1 Complex Joins & Set Operations: Inner, Left, Right, Full Outer Joins, Cross Joins,) Tj T*
+(Self Joins; UNION vs UNION ALL, INTERSECT, EXCEPT.) Tj T*
+(1.2 Aggregation & Grouping: GROUP BY, HAVING clause, aggregate functions \(COUNT, SUM,) Tj T*
+(AVG, MIN, MAX\), NULL value semantics \(COALESCE\).) Tj T*
+(1.3 Window \(Analytic\) Functions: ROW_NUMBER\(\), RANK\(\), DENSE_RANK\(\), NTILE\(\), OVER) Tj T*
+(\(PARTITION BY ... ORDER BY ...\), sliding window frames.) Tj T*
+(1.4 Common Table Expressions & Subqueries: Recursive CTEs, correlated subqueries vs) Tj T*
+(non-correlated subqueries, query execution plans.) Tj T*
+() Tj T*
+(MODULE 2: DATA WAREHOUSING & DIMENSIONAL MODELING) Tj T*
+(2.1 OLTP vs OLAP: Transactional normalized databases \(3NF\) vs Analytical denormalized) Tj T*
+(schemas.) Tj T*
+(2.2 Kimball Dimensional Modeling: Star Schema, Snowflake Schema, Fact tables) Tj T*
+(\(additive, semi-additive, non-additive facts\).) Tj T*
+(2.3 Slowly Changing Dimensions \(SCD\): SCD Type 0 \(fixed\), SCD Type 1 \(overwrite\), SCD) Tj T*
+(Type 2 \(historical tracking with surrogate keys, start/end dates\), SCD Type 3.) Tj T*
+(2.4 Data Pipeline ETL vs ELT: Staging layers, data marts, data lakehouses, change data) Tj T*
+(capture \(CDC\).) Tj T*
+() Tj T*
+(MODULE 3: BUSINESS METRICS & KPI FORMULATION) Tj T*
+(3.1 Financial & Operational KPIs: Customer Acquisition Cost \(CAC\), Customer Lifetime) Tj T*
+(Value \(CLV/LTV\), Churn Rate \(cohort retention curves\).) Tj T*
+(3.2 Revenue Analysis: Monthly Recurring Revenue \(MRR\), Net Revenue Retention \(NRR\),) Tj T*
+(Average Order Value \(AOV\), Year-Over-Year \(YoY\) growth calculations.) Tj T*
+(3.3 Funnel & Attribution Analysis: Conversion rate optimization, drop-off rates across) Tj T*
+(multi-touch customer journeys.) Tj T*
+() Tj T*
+(MODULE 4: DATA VISUALIZATION & EXECUTIVE DASHBOARDS) Tj T*
+(4.1 Visual Encoding & Chart Selection: Bar vs Line vs Scatter vs Heatmap; avoiding) Tj T*
+(chart junk and distorted axes.) Tj T*
+(4.2 Interactive Dashboards: Drill-downs, cross-filtering, global parameter controls,) Tj T*
+(dynamic tooltips.) Tj T*
+(4.3 Storytelling with Data: Executive summaries, narrative flow, designing for) Tj T*
+(decision-makers, actionable diagnostic callouts.) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000002803 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2929
+%%EOF

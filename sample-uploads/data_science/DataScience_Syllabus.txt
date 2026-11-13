@@ -1,0 +1,26 @@
+COURSE CODE: DS-501
+COURSE TITLE: Data Science, Statistical Modeling & Machine Learning
+DEPARTMENT: Department of Data Science & Quantitative Finance
+
+MODULE 1: EXPLORATORY DATA ANALYSIS & FEATURE ENGINEERING
+1.1 Data Distributions & Summary Statistics: Mean, median, mode, IQR, variance, skewness, kurtosis, and boxplot anomaly detection.
+1.2 Missing Data & Outliers: MCAR vs MAR vs MNAR; Imputation techniques (median, KNN, MICE); Z-score and Tukey IQR outlier clipping.
+1.3 Feature Scaling & Encoding: Min-Max Normalization vs Standard Z-score Standardization; One-Hot Encoding vs Target Encoding vs Ordinal Encoding.
+1.4 Dimensionality Reduction: Principal Component Analysis (PCA), eigendecomposition of covariance matrix, scree plot and explained variance ratio.
+
+MODULE 2: SUPERVISED LEARNING: REGRESSION & CLASSIFICATION
+2.1 Linear Models: Ordinary Least Squares (OLS) assumptions (Gauss-Markov theorem), multicollinearity, Variance Inflation Factor (VIF).
+2.2 Regularization: Ridge Regression (L2 penalty), Lasso Regression (L1 penalty, sparse feature selection), ElasticNet.
+2.3 Logistic Regression: Log-odds (logit) transformation, maximum likelihood estimation (MLE), Sigmoid activation, decision threshold tuning.
+2.4 Tree-Based Algorithms: Decision Trees (Entropy, Gini Impurity, Information Gain); Ensemble methods: Random Forests (Bagging), Gradient Boosted Trees (XGBoost, LightGBM).
+
+MODULE 3: MODEL EVALUATION & DIAGNOSTIC METRICS
+3.1 Classification Metrics: Confusion Matrix, Precision, Recall (Sensitivity), Specificity, F1-Score, Macro vs Weighted F1.
+3.2 Threshold Curves: Receiver Operating Characteristic (ROC) curve, Area Under the Curve (AUC-ROC), Precision-Recall (PR) Curve for imbalanced datasets.
+3.3 Cross-Validation: K-Fold, Stratified K-Fold (for imbalanced classes), Time-Series Purged Split, data leakage prevention.
+3.4 Bias-Variance Tradeoff: High bias (underfitting) vs High variance (overfitting), learning curves analysis, regularization tuning.
+
+MODULE 4: TIME SERIES & UNSUPERVISED CLUSTERING
+4.1 Clustering Algorithms: K-Means clustering, WCSS Elbow method, Silhouette score analysis; Hierarchical clustering and Dendrograms; DBSCAN density clustering.
+4.2 Time Series Components: Trend, Seasonality, Cyclical, and Irregular/Noise components; Additive vs Multiplicative decomposition.
+4.3 Stationarity & ARIMA: Augmented Dickey-Fuller (ADF) test, Differencing, Autoregressive (AR), Moving Average (MA), ARIMA(p,d,q) modeling.

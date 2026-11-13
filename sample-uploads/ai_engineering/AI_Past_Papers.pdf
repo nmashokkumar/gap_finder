@@ -1,0 +1,78 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2571 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(EXAMINATION BOARD: School of Computing & Artificial Intelligence) Tj T*
+(SUBJECT: Artificial Intelligence & LLM Systems \(Semester Final Examination\)) Tj T*
+(EXAM CODES: AI-2023, AI-2024, AI-2025 · Total Marks: 100) Tj T*
+() Tj T*
+(Question 1 \(2024 Exam · 5 Marks\):) Tj T*
+(Define admissibility and consistency of a heuristic function h\(n\) in the context of A*) Tj T*
+(search. State the mathematical condition for consistency and explain why consistency) Tj T*
+(guarantees optimality in graph search without reopening closed nodes.) Tj T*
+() Tj T*
+(Question 2 \(2024 Exam · 4 Marks\):) Tj T*
+(Explain the Alpha-Beta pruning procedure in two-player zero-sum games. State the) Tj T*
+(condition under which a branch is pruned. What is the best-case time complexity of) Tj T*
+(Alpha-Beta pruning with optimal move ordering?) Tj T*
+() Tj T*
+(Question 3 \(2023 Exam · 5 Marks\):) Tj T*
+(Explain the mathematical root cause of the Vanishing Gradient problem in Deep Neural) Tj T*
+(Networks when using the Sigmoid activation function. Why does the ReLU activation) Tj T*
+(function mitigate this problem, and what is the "Dying ReLU" issue?) Tj T*
+() Tj T*
+(Question 4 \(2025 Exam · 5 Marks\):) Tj T*
+(Compare standard Adam optimizer with AdamW. Why does standard L2 regularization behave) Tj T*
+(incorrectly when coupled with adaptive moment estimation in Adam?) Tj T*
+() Tj T*
+(Question 5 \(2025 Exam · 6 Marks\):) Tj T*
+(Write down the Scaled Dot-Product Attention equation in Transformers. Explain the) Tj T*
+(exact mathematical reason why the dot product \(Q * K^T\) is divided by the square root) Tj T*
+(of d_k. What happens to the softmax gradients if this scaling factor is omitted?) Tj T*
+() Tj T*
+(Question 6 \(2024 Exam · 4 Marks\):) Tj T*
+(What is the purpose of the KV-Cache during autoregressive LLM decoding? How does it) Tj T*
+(alter the computational complexity of generating the t-th token from scratch?) Tj T*
+() Tj T*
+(Question 7 \(2025 Exam · 6 Marks\):) Tj T*
+(Explain the end-to-end architecture of a Retrieval-Augmented Generation \(RAG\) system.) Tj T*
+(Describe the three distinct phases \(Ingestion, Retrieval, Generation\) and explain how) Tj T*
+(Cosine Similarity thresholding acts as a guardrail against hallucinations.) Tj T*
+() Tj T*
+(Question 8 \(2023 Exam · 5 Marks\):) Tj T*
+(Compare RAG with Parameter-Efficient Fine-Tuning \(LoRA\). When should an organization) Tj T*
+(choose RAG over fine-tuning, and why is fine-tuning alone insufficient for factual) Tj T*
+(recall in corporate settings?) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000002808 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2934
+%%EOF

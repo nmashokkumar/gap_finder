@@ -1,0 +1,27 @@
+EXAMINATION BOARD: Department of Data Science & Quantitative Finance
+SUBJECT: Advanced Data Science & Statistical Learning (Annual Comprehensive Examination)
+EXAM CODES: DS-2023, DS-2024, DS-2025 · Total Marks: 100
+
+Question 1 (2024 Exam · 5 Marks):
+Explain Tukey's Interquartile Range (IQR) method for outlier detection. How are inner and outer fences defined mathematically, and why is IQR preferred over standard deviation for skewed distributions?
+
+Question 2 (2023 Exam · 5 Marks):
+Derive the objective function of Principal Component Analysis (PCA). Explain why the principal components correspond to the eigenvectors of the sample covariance matrix, and what the eigenvalues represent.
+
+Question 3 (2024 Exam · 5 Marks):
+State the Gauss-Markov theorem for Ordinary Least Squares (OLS) regression and list its core assumptions. What is the consequence on regression coefficients if the strict exogeneity assumption is violated?
+
+Question 4 (2025 Exam · 5 Marks):
+Contrast Ridge Regression (L2) and Lasso Regression (L1). Explain geometrically why Lasso produces sparse models with exact zero coefficients while Ridge only shrinks coefficients asymptotically.
+
+Question 5 (2024 Exam · 6 Marks):
+A medical diagnostic model classifies a rare disease occurring in 0.5% of the population. Explain why accuracy is a misleading metric for this problem. Define Precision, Recall, and F1-Score, and explain why the Precision-Recall (PR) Curve is superior to the ROC Curve in this scenario.
+
+Question 6 (2023 Exam · 4 Marks):
+Explain the Bias-Variance tradeoff. Write down the mathematical decomposition of expected prediction error, and describe how diagnostic learning curves can identify whether a model suffers from high bias or high variance.
+
+Question 7 (2025 Exam · 5 Marks):
+Describe the algorithmic steps of K-Means clustering. How does the K-Means++ initialization algorithm improve convergence over naive random centroid initialization?
+
+Question 8 (2025 Exam · 5 Marks):
+Define covariance stationarity in a time series. State the three conditions required for a series to be stationary, and explain how the Augmented Dickey-Fuller (ADF) hypothesis test determines if differencing is necessary.

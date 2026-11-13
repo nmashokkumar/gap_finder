@@ -1,0 +1,217 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2361 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 1: INFORMED SEARCH & ADVERSARIAL ALGORITHMS \(Page 1\)) Tj T*
+() Tj T*
+([Chapter 1: Search & Logic · Section 1.1 · Page 1]) Tj T*
+(Search algorithms navigate state spaces from an initial state to a goal state.) Tj T*
+(Uninformed search strategies \(BFS, DFS\) explore without domain knowledge. BFS expands) Tj T*
+(the shallowest node using a FIFO queue, guaranteeing completeness and optimality for) Tj T*
+(unit-cost step problems, with time and space complexity O\(b^d\). DFS expands the) Tj T*
+(deepest unexpanded node using a LIFO stack, with space complexity O\(b*m\), but is not) Tj T*
+(optimal and can trap in infinite loops without cycle detection.) Tj T*
+() Tj T*
+([Chapter 1: Search & Logic · Section 1.2 · Page 1]) Tj T*
+(Informed \(Heuristic\) search leverages a heuristic function h\(n\) estimating the) Tj T*
+(cheapest path from node n to the goal.) Tj T*
+(The A* search algorithm evaluates nodes using f\(n\) = g\(n\) + h\(n\), where g\(n\) is the) Tj T*
+(exact cost incurred from the start node to n, and h\(n\) is the estimated cost from n to) Tj T*
+(the goal.) Tj T*
+(A heuristic h\(n\) is admissible if it never overestimates the true cost to reach the) Tj T*
+(goal: 0 <= h\(n\) <= h*\(n\).) Tj T*
+(A heuristic is consistent \(monotonic\) if for every node n and successor n' generated) Tj T*
+(by action a: h\(n\) <= c\(n, a, n'\) + h\(n'\) and h\(Goal\) = 0.) Tj T*
+(Theorem: If h\(n\) is admissible on tree search, or consistent on graph search, A* is) Tj T*
+(guaranteed to be complete and optimal.) Tj T*
+() Tj T*
+([Chapter 1: Search & Logic · Section 1.3 · Page 1]) Tj T*
+(In two-player zero-sum games, the Minimax algorithm computes optimal decisions) Tj T*
+(assuming an adversarial opponent.) Tj T*
+(Alpha-Beta pruning eliminates subtrees that cannot influence the final decision) Tj T*
+(without losing optimality:) Tj T*
+(- Alpha \(alpha\): The highest-value choice found so far along any choice point for MAX.) Tj T*
+(Initialized to -infinity.) Tj T*
+(- Beta \(beta\): The lowest-value choice found so far along any choice point for MIN.) Tj T*
+(Initialized to +infinity.) Tj T*
+(A branch is pruned whenever alpha >= beta. In the ideal move-ordering case, alpha-beta) Tj T*
+(pruning reduces the effective branching factor from b to sqrt\(b\), doubling the) Tj T*
+(reachable search depth.) Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 2537 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 2: DEEP LEARNING & TRAINING DYNAMICS \(Page 2\)) Tj T*
+() Tj T*
+([Chapter 2: Deep Learning · Section 2.1 · Page 2]) Tj T*
+(Artificial Neural Networks learn non-linear representations by stacking parameterized) Tj T*
+(affine transformations interleaved with element-wise non-linear activations: z^\(l\) =) Tj T*
+(W^\(l\) * a^\(l-1\) + b^\(l\), with a^\(l\) = sigma\(z^\(l\)\).) Tj T*
+(Training minimizes an objective loss L\(theta\) via reverse-mode automatic) Tj T*
+(differentiation \(Backpropagation\). Backpropagation recursively applies the) Tj T*
+(multivariate chain rule from the final loss backward toward input weights. For weight) Tj T*
+(matrix W^\(l\), the gradient is computed as: dL/dW^\(l\) = delta^\(l\) * \(a^\(l-1\)\)^T, where) Tj T*
+(delta^\(l\) = dL/dz^\(l\) represents the local error vector.) Tj T*
+() Tj T*
+([Chapter 2: Deep Learning · Section 2.2 · Page 2]) Tj T*
+(The choice of activation function governs gradient flow across deep networks.) Tj T*
+(The Sigmoid function, sigma\(z\) = 1 / \(1 + exp\(-z\)\), squashes inputs to \(0, 1\). Its) Tj T*
+(derivative, sigma'\(z\) = sigma\(z\) * \(1 - sigma\(z\)\), has a maximum value of only 0.25 at) Tj T*
+(z = 0. For large absolute values of z, the derivative approaches zero, causing the) Tj T*
+(vanishing gradient problem where early layers fail to update.) Tj T*
+(The Rectified Linear Unit, ReLU\(z\) = max\(0, z\), has a constant derivative of 1 for all) Tj T*
+(positive inputs, allowing gradient signals to propagate across dozens of layers) Tj T*
+(without exponential decay. However, neurons with z < 0 have zero gradient and can) Tj T*
+(permanently deactivate \(the "Dying ReLU" phenomenon\), which is mitigated by Leaky) Tj T*
+(ReLU, f\(z\) = max\(0.01z, z\), or GELU \(Gaussian Error Linear Unit\).) Tj T*
+() Tj T*
+([Chapter 2: Deep Learning · Section 2.3 · Page 2]) Tj T*
+(Modern deep networks are optimized using adaptive moment estimation.) Tj T*
+(Adam maintains exponentially decaying moving averages of past gradients \(first moment) Tj T*
+(m_t, estimating the mean\) and past squared gradients \(v_t, estimating uncentered) Tj T*
+(variance\):) Tj T*
+(m_t = beta_1 * m_{t-1} + \(1 - beta_1\) * g_t) Tj T*
+(v_t = beta_2 * v_{t-1} + \(1 - beta_2\) * \(g_t\)^2) Tj T*
+(AdamW \(Loshchilov & Hutter\) corrects standard Adam by decoupling L2 weight decay) Tj T*
+(regularization from the gradient update step, preventing adaptive scale distortions on) Tj T*
+(penalization weights and improving test generalization.) Tj T*
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 2188 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 3: ATTENTION & TRANSFORMER ARCHITECTURES \(Page 3\)) Tj T*
+() Tj T*
+([Chapter 3: Transformers · Section 3.1 · Page 3]) Tj T*
+(The Transformer architecture \(Vaswani et al., 2017\) dispenses with recurrent) Tj T*
+(recurrences entirely, computing token dependencies in parallel via Self-Attention.) Tj T*
+(Given an input sequence mapped to embedding matrix X in R^\(n x d_model\), linear) Tj T*
+(projections yield Queries \(Q = X * W_Q\), Keys \(K = X * W_K\), and Values \(V = X * W_V\),) Tj T*
+(where W_Q, W_K in R^\(d_model x d_k\) and W_V in R^\(d_model x d_v\).) Tj T*
+(Scaled Dot-Product Attention is formulated as:) Tj T*
+(Attention\(Q, K, V\) = softmax\(\(Q * K^T\) / sqrt\(d_k\)\) * V) Tj T*
+(The scaling factor 1 / sqrt\(d_k\) prevents the dot products from growing excessively) Tj T*
+(large for high dimensions d_k, which would push the softmax function into regions with) Tj T*
+(near-zero gradients.) Tj T*
+() Tj T*
+([Chapter 3: Transformers · Section 3.2 · Page 3]) Tj T*
+(Multi-Head Attention \(MHA\) projects queries, keys, and values h times into different) Tj T*
+(representation subspaces:) Tj T*
+(MultiHead\(Q, K, V\) = Concat\(head_1, ..., head_h\) * W_O) Tj T*
+(where head_i = Attention\(Q * W_Q^\(i\), K * W_K^\(i\), V * W_V^\(i\)\). This allows the model) Tj T*
+(to simultaneously attend to information from different representation subspaces at) Tj T*
+(different positions.) Tj T*
+() Tj T*
+([Chapter 3: Transformers · Section 3.3 · Page 3]) Tj T*
+(In decoder-only autoregressive LLMs \(like GPT and LLaMA\), causal masking is applied to) Tj T*
+(ensure prediction of token at position t depends only on tokens at indices <= t.) Tj T*
+(During inference, recomputing all key and value tensors for prior tokens at every) Tj T*
+(generation step scales quadratically O\(t^2\). The KV-Cache retains key and value) Tj T*
+(projections for past tokens in GPU memory, reducing step generation complexity to) Tj T*
+(O\(t\). Rotary Position Embeddings \(RoPE\) encode relative token distances by rotating) Tj T*
+(the query and key vectors in complex 2D planes, preserving relative distance decay) Tj T*
+(across long context windows.) Tj T*
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 2628 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(CHAPTER 4: RETRIEVAL-AUGMENTED GENERATION \(RAG\) & GROUNDING \(Page 4\)) Tj T*
+() Tj T*
+([Chapter 4: RAG Systems · Section 4.1 · Page 4]) Tj T*
+(Retrieval-Augmented Generation \(RAG\) decouples parametric model memory from non-) Tj T*
+(parametric factual knowledge.) Tj T*
+(An LLM trained on a static corpus cannot recall private enterprise data and suffers) Tj T*
+(from factual hallucinations when probed beyond its training cutoff.) Tj T*
+(RAG implements a strict two-stage pipeline:) Tj T*
+(1. Ingestion Phase: Documents are cleaned, segmented into discrete chunks \(e.g., 300) Tj T*
+(to 500 words with 10% overlap\), and mapped into dense vector embeddings using an) Tj T*
+(embedding model \(e.g., text-embedding-3-small, BAAI/bge-large\).) Tj T*
+(2. Retrieval Phase: A user query is embedded into the same vector space. A similarity) Tj T*
+(metric \(Cosine Similarity = \(u . v\) / \(||u|| * ||v||\)\) retrieves the Top-K closest) Tj T*
+(passages from an Approximate Nearest Neighbor index \(such as Hierarchical Navigable) Tj T*
+(Small World, HNSW\).) Tj T*
+(3. Augmented Generation Phase: The retrieved passages are injected into the LLM system) Tj T*
+(prompt as verified context boundaries. The model is instructed to answer strictly) Tj T*
+(using the provided excerpts and cite source sections.) Tj T*
+() Tj T*
+([Chapter 4: RAG Systems · Section 4.2 · Page 4]) Tj T*
+(Retrieval Guardrails and Grounding:) Tj T*
+(To eliminate hallucinations, the retrieval module must verify context relevance before) Tj T*
+(generation. If the highest similarity score between the query and the knowledge base) Tj T*
+(falls below a strict threshold \(e.g., Cosine Similarity < 0.10 or TF-IDF overlap <) Tj T*
+(0.08\), the system flags the query as Out-of-Scope and refuses generation, rather than) Tj T*
+(allowing the LLM to invent plausible-sounding false statements.) Tj T*
+() Tj T*
+([Chapter 4: RAG Systems · Section 4.3 · Page 4]) Tj T*
+(Trade-offs: RAG vs Fine-Tuning \(LoRA\):) Tj T*
+(- Parameter-Efficient Fine-Tuning \(LoRA / QLoRA\) alters model weights by injecting) Tj T*
+(low-rank decomposition matrices W = W_0 + \(B * A\) * \(alpha / r\). Fine-tuning excels at) Tj T*
+(teaching tone, syntax, dialect, or strict formatting styles, but is brittle for) Tj T*
+(factual recall and cannot dynamic update when files change daily.) Tj T*
+(- RAG updates instantly without gradient computation or GPU retraining simply by) Tj T*
+(adding or removing documents from the vector store. RAG provides deterministic,) Tj T*
+(verifiable citations that can be inspected and audited by human examiners.) Tj T*
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000002617 00000 n 
+0000002743 00000 n 
+0000005332 00000 n 
+0000005458 00000 n 
+0000007698 00000 n 
+0000007824 00000 n 
+0000010505 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+10633
+%%EOF

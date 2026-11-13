@@ -1,0 +1,79 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2892 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(COURSE CODE: DS-501) Tj T*
+(COURSE TITLE: Data Science, Statistical Modeling & Machine Learning) Tj T*
+(DEPARTMENT: Department of Data Science & Quantitative Finance) Tj T*
+() Tj T*
+(MODULE 1: EXPLORATORY DATA ANALYSIS & FEATURE ENGINEERING) Tj T*
+(1.1 Data Distributions & Summary Statistics: Mean, median, mode, IQR, variance,) Tj T*
+(skewness, kurtosis, and boxplot anomaly detection.) Tj T*
+(1.2 Missing Data & Outliers: MCAR vs MAR vs MNAR; Imputation techniques \(median, KNN,) Tj T*
+(MICE\); Z-score and Tukey IQR outlier clipping.) Tj T*
+(1.3 Feature Scaling & Encoding: Min-Max Normalization vs Standard Z-score) Tj T*
+(Standardization; One-Hot Encoding vs Target Encoding vs Ordinal Encoding.) Tj T*
+(1.4 Dimensionality Reduction: Principal Component Analysis \(PCA\), eigendecomposition) Tj T*
+(of covariance matrix, scree plot and explained variance ratio.) Tj T*
+() Tj T*
+(MODULE 2: SUPERVISED LEARNING: REGRESSION & CLASSIFICATION) Tj T*
+(2.1 Linear Models: Ordinary Least Squares \(OLS\) assumptions \(Gauss-Markov theorem\),) Tj T*
+(multicollinearity, Variance Inflation Factor \(VIF\).) Tj T*
+(2.2 Regularization: Ridge Regression \(L2 penalty\), Lasso Regression \(L1 penalty,) Tj T*
+(sparse feature selection\), ElasticNet.) Tj T*
+(2.3 Logistic Regression: Log-odds \(logit\) transformation, maximum likelihood) Tj T*
+(estimation \(MLE\), Sigmoid activation, decision threshold tuning.) Tj T*
+(2.4 Tree-Based Algorithms: Decision Trees \(Entropy, Gini Impurity, Information Gain\);) Tj T*
+(Ensemble methods: Random Forests \(Bagging\), Gradient Boosted Trees \(XGBoost,) Tj T*
+(LightGBM\).) Tj T*
+() Tj T*
+(MODULE 3: MODEL EVALUATION & DIAGNOSTIC METRICS) Tj T*
+(3.1 Classification Metrics: Confusion Matrix, Precision, Recall \(Sensitivity\),) Tj T*
+(Specificity, F1-Score, Macro vs Weighted F1.) Tj T*
+(3.2 Threshold Curves: Receiver Operating Characteristic \(ROC\) curve, Area Under the) Tj T*
+(Curve \(AUC-ROC\), Precision-Recall \(PR\) Curve for imbalanced datasets.) Tj T*
+(3.3 Cross-Validation: K-Fold, Stratified K-Fold \(for imbalanced classes\), Time-Series) Tj T*
+(Purged Split, data leakage prevention.) Tj T*
+(3.4 Bias-Variance Tradeoff: High bias \(underfitting\) vs High variance \(overfitting\),) Tj T*
+(learning curves analysis, regularization tuning.) Tj T*
+() Tj T*
+(MODULE 4: TIME SERIES & UNSUPERVISED CLUSTERING) Tj T*
+(4.1 Clustering Algorithms: K-Means clustering, WCSS Elbow method, Silhouette score) Tj T*
+(analysis; Hierarchical clustering and Dendrograms; DBSCAN density clustering.) Tj T*
+(4.2 Time Series Components: Trend, Seasonality, Cyclical, and Irregular/Noise) Tj T*
+(components; Additive vs Multiplicative decomposition.) Tj T*
+(4.3 Stationarity & ARIMA: Augmented Dickey-Fuller \(ADF\) test, Differencing,) Tj T*
+(Autoregressive \(AR\), Moving Average \(MA\), ARIMA\(p,d,q\) modeling.) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000003129 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3255
+%%EOF

@@ -1,0 +1,80 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 2821 >>
+stream
+BT
+/F1 10 Tf
+50 760 Td
+13 TL
+(COURSE CODE: CS-602) Tj T*
+(COURSE TITLE: Artificial Intelligence, Deep Learning & LLM Systems) Tj T*
+(DEPARTMENT: School of Computing & Artificial Intelligence) Tj T*
+() Tj T*
+(MODULE 1: SEARCH, LOGIC & KNOWLEDGE REPRESENTATION) Tj T*
+(1.1 Uninformed vs Informed Search: Breadth-First Search \(BFS\), Depth-First Search) Tj T*
+(\(DFS\), Uniform-Cost Search.) Tj T*
+(1.2 Heuristic Search: A* Search algorithm, admissibility and consistency of) Tj T*
+(heuristics, Greedy Best-First Search.) Tj T*
+(1.3 Adversarial Search & Games: Minimax algorithm, Alpha-Beta pruning, game tree) Tj T*
+(complexity.) Tj T*
+(1.4 Logic & Reasoning: First-Order Logic \(FOL\), resolution refutation, knowledge) Tj T*
+(bases, ontological engineering.) Tj T*
+() Tj T*
+(MODULE 2: DEEP LEARNING ARCHITECTURES & TRAINING DYNAMICS) Tj T*
+(2.1 Feedforward & Backpropagation: Multi-layer perceptrons, forward pass matrix math,) Tj T*
+(reverse-mode autodiff, chain rule.) Tj T*
+(2.2 Activation Functions & Gradient Flow: Sigmoid vanishing gradient problem, Tanh,) Tj T*
+(ReLU, Leaky ReLU, GELU.) Tj T*
+(2.3 Optimization Algorithms: Stochastic Gradient Descent \(SGD\) with momentum, RMSprop,) Tj T*
+(Adam, AdamW \(weight decay separation\), learning rate schedulers.) Tj T*
+(2.4 Convolutional & Recurrent Networks: Spatial convolutions, receptive fields,) Tj T*
+(pooling; Vanishing gradients in RNNs, LSTMs, GRUs.) Tj T*
+() Tj T*
+(MODULE 3: ATTENTION MECHANISMS & TRANSFORMER ARCHITECTURES) Tj T*
+(3.1 Self-Attention Formulation: Query, Key, Value linear projections, Scaled Dot-) Tj T*
+(Product Attention: Attention\(Q,K,V\) = softmax\(QK^T / sqrt\(d_k\)\) * V.) Tj T*
+(3.2 Multi-Head Attention: Subspace representations, concatenation, linear projection.) Tj T*
+(3.3 Modern Transformer Architectures: Encoder-only \(BERT\), Decoder-only autoregressive) Tj T*
+(\(GPT, LLaMA\), Encoder-Decoder \(T5\).) Tj T*
+(3.4 Positional Encodings: Absolute sinusoidal embeddings vs Rotary Positional) Tj T*
+(Embeddings \(RoPE\), KV-caching during inference.) Tj T*
+() Tj T*
+(MODULE 4: RETRIEVAL-AUGMENTED GENERATION \(RAG\) & LLM REASONING) Tj T*
+(4.1 The RAG Architecture: Dense embeddings \(bi-encoders\), vector similarity metrics) Tj T*
+(\(Cosine similarity, Dot Product\), Approximate Nearest Neighbor \(ANN\) index \(HNSW, IVF-) Tj T*
+(PQ\).) Tj T*
+(4.2 Chunking Strategies & Ingestion: Fixed-size with overlap, semantic recursive) Tj T*
+(chunking, metadata injection.) Tj T*
+(4.3 Hallucination Mitigation & Grounding: In-context grounding, source citation) Tj T*
+(attribution, retrieval guardrails \(cosine similarity thresholding\).) Tj T*
+(4.4 Fine-Tuning vs RAG: Parameter-Efficient Fine-Tuning \(PEFT, LoRA, QLoRA\), when to) Tj T*
+(use RAG \(dynamic private data\) vs LoRA \(style/domain terminology\).) Tj T*
+() Tj T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000003058 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3184
+%%EOF
