@@ -1,129 +1,166 @@
 # GapFinder AI — Find What the Student Doesn’t Know
 
-> **{igebra.ai} / AI Ready School — AI Intern Assignment Submission**  
-> **Problem Statement**: Diagnostic AI Study Companion (PS: GapFinder AI)
-
-Most study tools wait for a student to ask a question—but a student cannot ask about a gap they don't know they have. **GapFinder AI** acts like an **academic diagnostic doctor**: it ingests a student's syllabus, textbook notes, and past exam question papers, constructs a topic map, runs a 100% RAG-grounded diagnostic quiz, diagnoses topic-level weaknesses with exact citations, and builds a time-boxed, adaptive revision plan.
-
----
-
-## Key Features
-
-1. **Multi-Source Material Ingestion**: Upload custom PDF or TXT files for **Syllabus**, **Textbook Notes**, and **Past Papers** with client-side text extraction.
-2. **Topic Mapping via Cosine Retrieval**: Automatically extracts core syllabus topics and maps past-paper questions using vector similarity to determine high-weight exam topics.
-3. **100% RAG-Grounded Diagnostic Quiz**: Generates multiple-choice diagnostic questions strictly grounded in retrieved excerpts, each tagged with verbatim quotes, section labels, and page numbers.
-4. **Diagnostic Gap Report**: Computes exact percentage accuracy per topic and classifies weaknesses into 🔴 **Weak** (<50%), 🟡 **Medium** (50-79%), and 🟢 **Strong** (≥80%) with human-readable diagnostic reasons.
-5. **Adaptive Revision Plan**: Time-boxed day-by-day revision schedule prioritizing weak topics with high exam frequency, automatically pulling exact textbook citations.
-6. **Explain-This-Topic Grounded Chat**: Interactive tutor with mathematical cosine similarity guardrails (refuses out-of-scope questions) and streaming markdown/KaTeX formula rendering.
-7. **Progress Tracking**: Historical score progression across multiple diagnostic attempts with trend analytics.
-8. **Pre-Bundled Sample Study Packs**: Includes ready-to-test curriculum files for **Artificial Intelligence**, **Data Science**, **Data Analytics**, and **Microsoft Power BI**.
+> **{igebra.ai} / AI Ready School — AI Intern Assignment Submission 2026**  
+> **Problem Statement**: Diagnostic AI Study Companion (GapFinder AI)  
+> **Live Demo**: Ready for 1-Click Vercel Deployment
 
 ---
 
-## System Architecture: Strict Separation of Retrieval & Generation
+## 1. The Problem: The Revision Blind Spot
 
-GapFinder AI enforces a strict two-stage pipeline to guarantee zero hallucinations:
+When preparing for exams or technical interviews, students almost always revise what they already know. They re-read familiar textbook chapters and skip difficult ones. More critically: **a student cannot ask a standard chatbot about a knowledge gap they don’t know they have.** 
+
+Standard study tools wait passively for the student to ask a question. This leads to wasted revision time, false confidence, and missed concepts on exam day.
+
+---
+
+## 2. The Solution: GapFinder AI (Study Doctor)
+
+**GapFinder AI acts like an academic diagnostic doctor rather than a passive chatbot.** Instead of waiting for questions, it:
+1. **Maps the Curriculum**: Ingests the student's own syllabus, lecture notes, and past exam question papers.
+2. **Conducts a Grounded Diagnostic Test**: Generates multiple-choice diagnostic questions grounded 100% in the uploaded textbook notes with exact page and section citations.
+3. **Diagnoses Knowledge Gaps**: Analyzes the student's answers, calculates topic accuracy, and classifies topics into **🔴 Weak (<50%)**, **🟡 Medium (50-79%)**, and **🟢 Strong (≥80%)**.
+4. **Prescribes an Adaptive Revision Schedule**: Creates a time-boxed, prioritized daily revision plan that focuses the student's study hours strictly on their high-exam-weight weak areas.
+5. **Provides Guardrailed Explanations**: Features an "Explain-This-Topic" assistant with strict cosine similarity guardrails that refuses out-of-scope queries to eliminate hallucinations.
+
+---
+
+## 3. Technology Stack
+
+| Layer | Technologies Used | Purpose |
+| :--- | :--- | :--- |
+| **AI & RAG Engine** | **Python 3**, `NumPy`, `Scikit-Learn`, `Pandas`, `Groq SDK` | Deterministic TF-IDF vector retrieval, Cosine Similarity math, chunking, and hallucination guardrails. |
+| **Backend API** | **FastAPI**, `Uvicorn`, `Pydantic v2` | Fully-typed REST API endpoints for syllabus mapping, diagnostic quizzes, gap reports, and revision planning. |
+| **Frontend UI** | **Next.js 14 (App Router)**, **TypeScript**, `Tailwind CSS`, `Lucide Icons` | Clean, calm, distraction-free student workspace with zero clutter. |
+| **Inference LLM** | **Groq Cloud** (`openai/gpt-oss-120b`) | Sub-second structured JSON extraction and context-grounded text generation. |
+| **PDF Extraction** | Mozilla `pdfjs-dist` (Client-side) | Client-side parsing allowing unlimited-size student PDF uploads without server limits. |
+| **Data Analytics** | `Recharts` | Historical score progression and diagnostic attempt trend charts. |
+| **Deployment** | **Vercel** + **Uvicorn / Serverless** | 1-Click cloud deployment for instant evaluator testing. |
+
+---
+
+## 4. System Architecture: Separation of Retrieval & Generation
+
+GapFinder AI enforces a strict two-stage pipeline so the LLM cannot hallucinate from general pre-training memory:
 
 ```
-[Uploaded Materials: PDF / TXT]
-            │
-            ▼
+[Student Uploads: Syllabus, Notes, Past Exam Papers (PDF/TXT)]
+                             │
+                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ STAGE 1: DETERMINISTIC RETRIEVAL (Zero LLM Involvement)     │
-│  - Document Chunking with Section & Page Preservation       │
-│  - TF-IDF Vector Space Model & Vocabulary Indexing          │
-│  - Cosine Similarity Matching: (u · v) / (||u|| * ||v||)    │
-│  - Strict Relevance Guardrail (Refuses queries if score < θ)│
+│ STAGE 1: DETERMINISTIC RETRIEVAL (Pure Python Math)         │
+│  - Document Chunking preserving Chapter Headers & Pages     │
+│  - TF-IDF Vectorization (Scikit-Learn & NumPy)              │
+│  - Cosine Similarity Matching: (A · B) / (||A|| * ||B||)    │
+│  - Strict Guardrail: Cosine score < 0.08 blocks generation  │
 └─────────────────────────────────────────────────────────────┘
-            │
-            ▼ [Top-K Retrieved Excerpts with Citations]
+                             │
+                             ▼ [Top-K Retrieved Excerpts + Citations]
 ┌─────────────────────────────────────────────────────────────┐
 │ STAGE 2: AUGMENTED GENERATION (Groq Cloud LLM)              │
-│  - Strict context-bounded prompts                           │
-│  - Structured JSON extraction (Zod schemas)                 │
-│  - Grounded MCQ generation with verbatim citation quotes    │
-│  - Diagnostic reason formulation                            │
+│  - Injects retrieved excerpts as strict context boundary    │
+│  - Generates diagnostic MCQs with verbatim citation quotes  │
+│  - Evaluates student answers and calculates gap accuracy    │
+│  - Formulates day-by-day prioritized revision schedule      │
 └─────────────────────────────────────────────────────────────┘
-            │
-            ▼
-[Student Diagnosis: Weak Topics + Adaptive Plan + Explanations]
+                             │
+                             ▼
+[Diagnostic Gap Report: 🔴 Weak / 🟡 Medium / 🟢 Strong + Daily Plan]
 ```
 
 ---
 
-## Repository Structure
+## 5. Repository Structure
 
 ```
 .
-├── src/
-│   ├── app/                      # Next.js App Router pages & API routes
-│   │   ├── api/
-│   │   │   ├── chat/             # Streaming RAG grounded tutor endpoint
-│   │   │   ├── gap-report/       # Topic-level weakness diagnosis endpoint
-│   │   │   ├── quiz/             # RAG-grounded diagnostic MCQ generation
-│   │   │   ├── revision-plan/    # Time-boxed adaptive plan generator
-│   │   │   └── topic-map/        # Syllabus parsing & past-paper mapping
-│   │   ├── architecture/         # Interactive system transparency & retrieval inspector
-│   │   ├── chat/                 # Explain-This-Topic RAG chat interface
-│   │   ├── login/                # Authentication screen (demo student login)
-│   │   ├── progress/             # Historical score progression dashboard
-│   │   ├── quiz/                 # Diagnostic test runner with citation inspector
-│   │   └── report/               # Gap report diagnosis & revision plan view
-│   ├── components/               # UI components (Uploader, TopicMap, MarkdownMessage)
-│   ├── lib/
-│   │   ├── ai/                   # Groq model configurations & structured helpers
-│   │   ├── pdf/                  # Client-side PDF text extraction
-│   │   ├── rag/                  # Chunker & TF-IDF Cosine Similarity retriever
-│   │   └── storage/              # Student state management & localStorage persistence
-│   └── types/                    # TypeScript interfaces for full-stack type safety
-├── sample-uploads/               # Pre-generated PDF & TXT test packs
-│   ├── ai_engineering/           # AI, Deep Learning & Transformer study materials
+├── backend/                      # Pure Python AI & RAG Backend
+│   ├── main.py                   # FastAPI application with REST endpoints
+│   ├── demo_rag_cli.py           # Standalone terminal demo script for technical interviews
+│   ├── test_suite.py             # Automated multi-sample verification suite
+│   ├── requirements.txt          # Python library dependencies (numpy, sklearn, groq, etc.)
+│   ├── models/
+│   │   └── schemas.py            # Pydantic data models with 12th-grade plain English comments
+│   ├── rag/
+│   │   ├── chunker.py            # Chapter & page-aware document chunker
+│   │   └── retriever.py          # TF-IDF Cosine Similarity retriever & guardrails
+│   └── services/
+│       └── ai_service.py         # Groq LLM integration for quizzes, gaps & revision plans
+├── sample-uploads/               # Pre-packaged curriculum test sets (PDF & TXT)
+│   ├── ai_engineering/           # AI, Deep Learning, Transformers & RAG study materials
 │   ├── data_science/             # EDA, Regression, Clustering & Model evaluation
 │   ├── data_analytics/           # SQL Window functions, Kimball DWH & SaaS KPIs
-│   └── powerbi/                  # Power BI, DAX & Power Query study materials
+│   └── powerbi/                  # Power BI, DAX & Power Query materials
+├── src/                          # Next.js 14 frontend workspace & evaluator UI
+│   ├── app/                      # Workspace, Quiz, Gap Report, Chat & Architecture pages
+│   └── components/               # Clean UI components (MaterialUploader, TopicMapView, etc.)
+├── next.config.mjs               # Proxies frontend /api/* calls to FastAPI backend
 └── README.md
 ```
 
 ---
 
-## Local Setup & Quick Start
+## 6. Local Quick Start (For Evaluators & Developers)
 
-### 1. Prerequisites
-- Node.js 18+ or 20+
-- A free Groq API key from [console.groq.com](https://console.groq.com)
-
-### 2. Installation
+### Step 1: Clone the Repository
 ```bash
-git clone git@github.com:nmashokkumar/gap_finder.git
+git clone https://github.com/nmashokkumar/gap_finder.git
 cd gap_finder
-npm install
 ```
 
-### 3. Environment Configuration
+### Step 2: Configure Environment
 Create a `.env.local` file in the root directory:
 ```env
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-### 4. Run Development Server
+### Step 3: Run the Python AI Engine (Terminal 1)
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
+uvicorn backend.main:app --port 8000 --reload
+```
+
+### Step 4: Run the Frontend UI (Terminal 2)
+```bash
+npm install
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
 ---
 
-## Evaluator Walkthrough (1-Click Demo)
+## 7. Fast Terminal Demonstration (For Technical Interviews)
 
-1. Navigate to `/login` and click **"Sign In as Demo Student"**.
-2. On the **Workspace** (`/`), click **"Load AI/ML Sample Material"** (or upload your own PDF/TXT files from `sample-uploads/`).
-3. Click **"Build Topic Map"** to view syllabus modules and linked past-paper exam frequencies.
-4. Click **"Start Diagnostic Quiz"** &rarr; answer the generated questions &rarr; submit to view your **Gap Report**.
-5. Inspect your identified **Weak**, **Medium**, and **Strong** topics along with the customized **Day-by-Day Revision Plan**.
-6. Open **Explain Chat** (`/chat`) to ask questions grounded strictly in your uploaded materials.
-7. Open **How RAG Works** (`/architecture`) to test live vector retrieval and inspect how Stage 1 (Deterministic Math) and Stage 2 (Generation) are strictly separated.
+If an interviewer asks you to demonstrate the RAG pipeline directly without opening a browser:
+```bash
+python backend/demo_rag_cli.py
+```
+This single command:
+1. Loads curriculum notes from `sample-uploads/`.
+2. Chunks the text preserving chapter headers and page numbers.
+3. Runs **NumPy Cosine Similarity retrieval** on a sample student question.
+4. Tests the **Hallucination Guardrail** against an out-of-scope question (proves it gets blocked).
+5. Extracts syllabus topics and links past-paper questions.
+6. Generates a grounded multiple-choice diagnostic question with verbatim citations.
+
+---
+
+## 8. 1-Click Vercel Deployment
+
+1. Import your `gap_finder` GitHub repository into **[Vercel](https://vercel.com)**.
+2. In the Vercel Project Settings, add one Environment Variable:
+   - **Key**: `GROQ_API_KEY`
+   - **Value**: `your_groq_api_key`
+3. Click **Deploy**. Vercel will build the frontend and serve the application globally with a live URL.
+
+---
+
+## 9. Fallback & Safe Tagging
+The original pure-TypeScript implementation is permanently preserved under Git tag **`v1.0.0-typescript-stable`** and branch **`typescript-stable`**, ensuring 100% rollback capability at any time.
 
 ---
 
 ## License
-MIT License. Built for the **{igebra.ai} AI Intern Evaluation 2026**.
+MIT License. Developed for the **{igebra.ai} AI Intern Evaluation 2026**.
