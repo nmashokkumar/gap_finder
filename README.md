@@ -2,7 +2,18 @@
 
 > **{igebra.ai} / AI Ready School — AI Intern Assignment Submission 2026**  
 > **Problem Statement**: Diagnostic AI Study Companion (GapFinder AI)  
-> **Live Demo**: Ready for 1-Click Vercel Deployment
+> **Live Web Application**: [https://gap-finder-henna.vercel.app/](https://gap-finder-henna.vercel.app/)  
+> **GitHub Repository**: [https://github.com/nmashokkumar/gap_finder](https://github.com/nmashokkumar/gap_finder)
+
+---
+
+## Quick Evaluator Demo (1-Click Test)
+
+Evaluators can test the entire workflow on the live link with zero setup:
+1. Open **[https://gap-finder-henna.vercel.app/](https://gap-finder-henna.vercel.app/)**.
+2. Click **"Sign In as Demo Student"** (`demo@gapfinder.ai` / `demo1234`).
+3. Click **"Load AI/ML Sample Material"** (or upload your own PDF/TXT files).
+4. Click **"Build Topic Map"** &rarr; **"Start Diagnostic Quiz"** &rarr; Submit to inspect the **Gap Report**, **Prioritized Revision Plan**, and **Explain Chat**!
 
 ---
 
